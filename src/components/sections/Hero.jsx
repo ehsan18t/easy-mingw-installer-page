@@ -1,4 +1,5 @@
 import React from 'react'
+import { FaGithub, FaDownload } from 'react-icons/fa'
 
 const Hero = () => {
   return (
@@ -13,9 +14,19 @@ const Hero = () => {
         </p>
         <a
           href="#download-section"
-          className="inline-block bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 px-8 rounded-full shadow-md transition duration-300 transform hover:scale-105 hover:shadow-lg"
+          className="inline-flex gap-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 px-8 rounded-full shadow-md transition duration-300 transform hover:scale-105 hover:shadow-lg mr-4"
         >
+          <FaDownload className="text-xl" />
           Download Now
+        </a>
+        <a
+          href="https://github.com/ehsan18t/easy-mingw-installer"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex gap-2 items-center justify-center bg-gradient-to-r from-gray-700 to-slate-800 text-white py-3 px-6 rounded-full shadow-md transition duration-300 transform hover:scale-105 hover:shadow-lg"
+        >
+          <FaGithub className="text-xl" />
+          View Project on GitHub
         </a>
       </div>
     </div>
