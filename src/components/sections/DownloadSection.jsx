@@ -69,6 +69,7 @@ const DownloadSection = () => {
               <br />
               <span className="font-semibold">Older Versions:</span> Check on{' '}
               <a
+                target="_blank"
                 href={`https://github.com/${repo}/releases`}
                 className="text-blue-500 hover:underline"
               >
