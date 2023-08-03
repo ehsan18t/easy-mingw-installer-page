@@ -8,7 +8,7 @@ const Section = ({ title, content, backgroundColor, textColor }) => {
 
   return (
     <div
-      className={`py-10 px-6 border border-gray-300 ${sectionStyle.backgroundColor}`}
+      className={`py-10 px-2 md:px-4 lg:px-6  border border-gray-300 ${sectionStyle.backgroundColor}`}
     >
       <div className="flex flex-col gap-3 justify-center items-center">
         <h2 className="text-3xl font-semibold">{title}</h2>
