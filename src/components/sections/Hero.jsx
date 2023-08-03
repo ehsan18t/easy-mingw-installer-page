@@ -29,7 +29,7 @@ const Hero = () => {
             href="https://github.com/ehsan18t/easy-mingw-installer"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex gap-2 items-center justify-center bg-gradient-to-r from-gray-700 to-slate-800 text-white py-3 px-6 rounded-full shadow-md transition duration-300 transform hover:scale-105 hover:shadow-lg hover:no-underline"
+            className="inline-flex gap-2 items-center justify-center bg-gradient-to-r from-gray-700 to-slate-800 text-white py-3 px-6 no-underline rounded-full shadow-md transition duration-300 transform hover:scale-105 hover:shadow-lg hover:no-underline"
           >
             <FaGithub className="text-xl" />
             View Project on GitHub
