@@ -15,8 +15,10 @@ const App = () => {
         backgroundColor="bg-gray-100"
         textColor="text-gray-800"
       />
-      <Features />
-      <DownloadSection />
+      <div className="mx-4 md:mx-8 lg:mx-12">
+        <Features />
+        <DownloadSection />
+      </div>
       <div className="flex-grow"></div>
       <Footer />
     </div>

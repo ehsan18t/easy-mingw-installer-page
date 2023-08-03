@@ -33,7 +33,7 @@ const DownloadSection = () => {
   }, [])
 
   return (
-    <div id="download-section" className="bg-gray-100 px-12 pb-8">
+    <div id="download-section" className="mb-8">
       <Downloads latestReleases={latestReleases} />
       <ReleaseNotes repo={repo} latestRelease={latestReleases} />
     </div>
