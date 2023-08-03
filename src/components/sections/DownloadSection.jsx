@@ -3,8 +3,8 @@ import { FaDownload } from 'react-icons/fa'
 
 const DownloadLink = ({ platform, link }) => {
   return (
-    <a target="_blank" href={link} className="w-full md:w-1/2 lg:w-1/3 p-4">
-      <div className="border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300 ease-in-out">
+    <a target="_blank" href={link} className="w-full md:w-1/2 lg:w-1/3 p-4 ">
+      <div className="border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
         <div className="p-6 bg-gradient-to-r from-blue-500 to-teal-500 text-white flex items-center justify-center">
           <FaDownload className="text-4xl" />
         </div>
