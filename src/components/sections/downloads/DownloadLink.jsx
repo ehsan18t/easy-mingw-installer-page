@@ -6,7 +6,7 @@ const DownloadLink = ({ platform, link }) => {
     <a
       target="_blank"
       href={link}
-      className="w-full lg:w-2/5 no-underline hover:no-underline px-4 md:px-0"
+      className="w-full lg:w-2/5 remove-underline px-4 md:px-0"
     >
       <div className="border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
         <div className="p-6 bg-gradient-to-r from-blue-500 to-teal-500 text-white flex items-center justify-center">
