@@ -18,6 +18,17 @@ const ReleaseNotes = ({ repo, latestRelease }) => {
         className="mx-10 markdown"
         markdown={latestRelease.description}
       />
+      <p className="ml-12 mt-5 p-4 text-slate-600 border-[1px] border-green-500 border-l-8 rounded-xl">
+        <span className="font-semibold">Older Releases: </span>
+        Check on{' '}
+        <a
+          target="_blank"
+          href={`https://github.com/${repo}/releases`}
+          className="text-blue-500 hover:underline"
+        >
+          GitHub
+        </a>
+      </p>
     </div>
   )
 }
