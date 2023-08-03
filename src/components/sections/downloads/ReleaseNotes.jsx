@@ -1,5 +1,6 @@
 import React from 'react'
 import Markdown from '../../markdown/Markdown'
+import { MdNewReleases } from 'react-icons/md'
 
 const ReleaseNotes = ({ repo, latestRelease }) => {
   const releaseDate = new Date(latestRelease.published_at)
@@ -10,15 +11,16 @@ const ReleaseNotes = ({ repo, latestRelease }) => {
 
   return (
     <div className="bg-white shadow-md rounded-lg p-6">
-      <h1 className="text-3xl font-semibold">
-        Release v{latestRelease.version}
+      <h1 className="text-3xl flex gap-3 items-center">
+        <MdNewReleases className="text-4xl text-green-500" /> Release v
+        {latestRelease.version}
       </h1>
-      <p className="text-gray-600 pl-4">Released on {formattedDate}</p>
+      <p className="text-gray-600 px-10">Released on {formattedDate}</p>
       <Markdown
         className="mx-10 markdown"
         markdown={latestRelease.description}
       />
-      <p className="ml-12 mt-5 p-4 text-slate-600 border-[1px] border-green-500 border-l-8 rounded-xl">
+      <p className="mx-12 mt-5 p-4 text-slate-600 border-[1px] border-green-500 border-l-8 rounded-xl">
         <span className="font-semibold">Older Releases: </span>
         Check on{' '}
         <a

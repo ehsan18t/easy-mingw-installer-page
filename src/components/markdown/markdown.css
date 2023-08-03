@@ -203,7 +203,7 @@ blockquote {
   vertical-align: top;
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-left: #1976d2 4px solid;
-  width: 100%;
+  width: 98%;
   @apply text-gray-600/80;
 }
 
