@@ -3,7 +3,7 @@ import React from 'react'
 const Footer = () => {
   return (
     <div className="bottom-0 w-full">
-      <div className="flex justify-center bg-gray-200/70 p-4">
+      <div className="flex justify-center bg-white border-t-[1px] border-gray-200 text-gray-700 p-4">
         <p className="text-xs">
           &copy; 2023 Easy MinGW Installer | Created by{' '}
           <a
