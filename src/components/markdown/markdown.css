@@ -49,6 +49,11 @@ h1 {
   margin: 2rem 0.75rem 1.25rem 0.75rem;
 }
 
+.markdown h1,
+.markdown h2 {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
 h2 {
   font-size: calc(0.9rem + 0.9vw);
   margin: 1.5rem 0.75rem 1rem 0.75rem;

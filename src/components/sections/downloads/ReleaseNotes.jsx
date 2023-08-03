@@ -10,14 +10,14 @@ const ReleaseNotes = ({ repo, latestRelease }) => {
 
   return (
     <div className="bg-white shadow-md rounded-lg p-6">
-      <h1 className="text-3xl font-semibold">Release Notes</h1>
-      <div>
-        <h2 className="text-lg font-semibold">
-          Version v{latestRelease.version}
-        </h2>
-        <p className="text-gray-600">Released on {formattedDate}</p>
-      </div>
-      <Markdown className="mx-10" markdown={latestRelease.description} />
+      <h1 className="text-3xl font-semibold">
+        Release v{latestRelease.version}
+      </h1>
+      <p className="text-gray-600 pl-4">Released on {formattedDate}</p>
+      <Markdown
+        className="mx-10 markdown"
+        markdown={latestRelease.description}
+      />
     </div>
   )
 }
