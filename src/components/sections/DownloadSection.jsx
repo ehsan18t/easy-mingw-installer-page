@@ -18,6 +18,8 @@ const DownloadSection = () => {
 
         //   save names as well
         const latestLinks = {
+          description: data.body,
+          published_at: data.published_at,
           version: data.tag_name,
           win64: data.assets.find((asset) => asset.name.includes('64-bit'))
             .browser_download_url,
@@ -33,7 +35,7 @@ const DownloadSection = () => {
   return (
     <div id="download-section" className="bg-gray-100 px-12 pb-8">
       <Downloads latestReleases={latestReleases} />
-      <ReleaseNotes repo={repo} version={latestReleases.version} />
+      <ReleaseNotes repo={repo} latestRelease={latestReleases} />
     </div>
   )
 }
