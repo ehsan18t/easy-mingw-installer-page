@@ -1,23 +1,18 @@
-import React from 'react'
-
 const Section = ({ title, content, backgroundColor, textColor }) => {
   const sectionStyle = {
     backgroundColor: backgroundColor || 'bg-gray-100',
     color: textColor || 'text-gray-700',
-  }
+  };
 
   return (
     <div
-      className={`py-10 px-2 md:px-4 lg:px-6  border border-gray-300 ${sectionStyle.backgroundColor}`}
-    >
-      <div className="flex flex-col gap-3 justify-center items-center">
+      className={`border border-gray-300 px-2 py-10  md:px-4 lg:px-6 ${sectionStyle.backgroundColor}`}>
+      <div className="flex flex-col items-center justify-center gap-3">
         <h2 className="text-3xl font-semibold">{title}</h2>
-        <p className={`text-lg text-justify ${sectionStyle.color}`}>
-          {content}
-        </p>
+        <p className={`text-justify text-lg ${sectionStyle.color}`}>{content}</p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Section
+export default Section;

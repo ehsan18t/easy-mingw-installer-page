@@ -1,13 +1,12 @@
-import React from 'react'
-import Footer from './components/sections/Footer'
-import Hero from './components/sections/Hero'
-import Section from './components/sections/Section'
-import Features from './components/sections/Features'
-import DownloadSection from './components/sections/DownloadSection'
+import DownloadSection from './components/sections/DownloadSection';
+import Features from './components/sections/Features';
+import Footer from './components/sections/Footer';
+import Hero from './components/sections/Hero';
+import Section from './components/sections/Section';
 
 const App = () => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex min-h-screen flex-col">
       <Hero />
       <Section
         title="Motivation"
@@ -22,7 +21,7 @@ const App = () => {
       <div className="flex-grow"></div>
       <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

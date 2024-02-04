@@ -1,20 +1,17 @@
-import React from 'react'
-import DownloadLink from './DownloadLink'
+import DownloadLink from './DownloadLink';
 
 const Downloads = ({ latestReleases }) => {
   return (
     <div>
-      <h2 className="text-3xl font-semibold text-center mb-12 mt-12">
-        Downloads
-      </h2>
-      <div className="flex flex-col justify-center w-full mb-10">
-        <div className="flex flex-wrap flex-col lg:flex-row gap-4 md:gap-6 -mx-4 md:-mx-2 justify-center">
+      <h2 className="mb-12 mt-12 text-center text-3xl font-semibold">Downloads</h2>
+      <div className="mb-10 flex w-full flex-col justify-center">
+        <div className="-mx-4 flex flex-col flex-wrap justify-center gap-4 md:-mx-2 md:gap-6 lg:flex-row">
           <DownloadLink platform="Windows 64-bit" link={latestReleases.win64} />
           <DownloadLink platform="Windows 32-bit" link={latestReleases.win32} />
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Downloads
+export default Downloads;

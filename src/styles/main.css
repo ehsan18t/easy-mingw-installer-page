@@ -8,5 +8,5 @@ body {
 }
 
 .remove-underline {
-  @apply no-underline hover:no-underline visited:no-underline focus:no-underline;
+  @apply no-underline visited:no-underline hover:no-underline focus:no-underline;
 }
