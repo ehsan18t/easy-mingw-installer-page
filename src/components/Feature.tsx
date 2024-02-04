@@ -4,7 +4,7 @@ type FeatureProps = {
   icon: React.ReactNode;
 };
 
-export default function Feature({ title, description, icon }) {
+export default function Feature({ title, description, icon }: FeatureProps) {
   return (
     <div className='flex items-center gap-4'>
       <div className='flex items-center justify-center rounded-full bg-blue-500 p-4 text-2xl text-white'>
