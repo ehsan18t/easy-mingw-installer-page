@@ -4,7 +4,7 @@ import { Feature } from '@/components';
 
 const Features = () => {
   return (
-    <div className="mb-6 mt-6 flex flex-col justify-between">
+    <section className="mx-4 mb-6 mt-6 flex flex-col justify-between md:mx-8 lg:mx-12">
       <h2 className="mb-8 text-center text-3xl font-semibold">Features</h2>
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         <Feature
@@ -23,7 +23,7 @@ const Features = () => {
           icon={<FaBoxOpen />}
         />
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -37,8 +37,8 @@ const DownloadSection = () => {
   }, []);
 
   return (
-    <section id='download-section' className='mb-8'>
-      <h2 className='mb-12 mt-12 text-center text-3xl font-semibold'>Downloads</h2>
+    <section id="download-section" className="mx-4 mb-8 md:mx-8 lg:mx-12">
+      <h2 className="mb-12 mt-12 text-center text-3xl font-semibold">Downloads</h2>
       {loading ? (
         <Loading />
       ) : (

@@ -10,11 +10,8 @@ export default function Home() {
         backgroundColor="bg-gray-100"
         textColor="text-gray-800"
       />
-      <div className="mx-4 md:mx-8 lg:mx-12">
-        <Features />
-        <DownloadSection />
-      </div>
-      <div className="flex-grow"></div>
+      <Features />
+      <DownloadSection />
       <Footer />
     </main>
   );

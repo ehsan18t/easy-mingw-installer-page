@@ -4,7 +4,7 @@ import { JumpButton } from '@/components';
 
 const Hero = () => {
   return (
-    <div className="bg-gradient-to-r from-teal-900 to-blue-600 py-20 text-white">
+    <section className="bg-gradient-to-r from-teal-900 to-blue-600 py-20 text-white">
       <div className="mx-auto text-center">
         <h1 className="mb-4 text-5xl font-bold tracking-tight">Easy MinGW Installer</h1>
         <p className="mx-auto mb-8 max-w-lg text-lg">
@@ -27,7 +27,7 @@ const Hero = () => {
           </a>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
