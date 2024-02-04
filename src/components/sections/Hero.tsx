@@ -1,5 +1,6 @@
-import { JumpButton } from '@/components';
 import { FaDownload, FaGithub } from 'react-icons/fa';
+
+import { JumpButton } from '@/components';
 
 const Hero = () => {
   return (

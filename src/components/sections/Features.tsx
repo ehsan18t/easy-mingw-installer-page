@@ -1,5 +1,6 @@
-import { Feature } from '@/components';
 import { FaBoxOpen, FaCheckCircle, FaCode } from 'react-icons/fa';
+
+import { Feature } from '@/components';
 
 const Features = () => {
   return (

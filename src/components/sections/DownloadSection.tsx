@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 
 import { Loading } from '@/components';
+
 import Downloads from './downloads/Downloads';
 import ReleaseNotes from './downloads/ReleaseNotes';
 
