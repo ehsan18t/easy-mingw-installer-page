@@ -1,35 +1,53 @@
 module.exports = {
-  env: {
-    browser: true,
-    es2021: true,
-  },
+  root: true,
+  env: { browser: true, es2020: true, node: true },
   extends: [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:react/jsx-runtime",
-    "plugin:react-hooks/recommended",
-    "plugin:prettier/recommended",
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
+    'plugin:react-hooks/recommended',
+    'plugin:import/recommended',
+    'plugin:prettier/recommended',
   ],
-  overrides: [],
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
+  globals: {
+    __dirname: true,
   },
-  plugins: ["react", "prettier"],
+  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
+  settings: {
+    react: { version: 'detect' },
+    'import/resolver': {
+      alias: {
+        map: [['@', './src']],
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+      },
+    },
+  },
+  plugins: ['react-refresh', 'import'],
   rules: {
-    "at-rule-no-unknown": [
-      true,
+    'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+    'react/prop-types': 'off',
+    'import/order': [
+      'warn',
       {
-        ignoreAtRules: [
-          "tailwind",
-          "apply",
-          "variants",
-          "responsive",
-          "screen",
+        groups: [
+          ['external', 'builtin'],
+          ['internal', 'index'],
+          ['parent', 'sibling'],
         ],
+        'newlines-between': 'always',
+        alphabetize: {
+          order: 'asc',
+          caseInsensitive: true,
+        },
       },
     ],
-    "declaration-block-trailing-semicolon": null,
-    "no-descending-specificity": null,
+    'import/no-unresolved': ['error', { caseSensitive: true }],
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
   },
 };
