@@ -1,3 +1,5 @@
+import { FaDownload } from 'react-icons/fa';
+
 const DownloadLink = ({ platform, link }) => {
   return (
     <a

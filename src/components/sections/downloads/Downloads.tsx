@@ -1,4 +1,4 @@
-import DownloadLink from './DownloadLink';
+import { DownloadLink } from '@/components';
 
 const Downloads = ({ latestReleases, isLoading }) => {
   return (

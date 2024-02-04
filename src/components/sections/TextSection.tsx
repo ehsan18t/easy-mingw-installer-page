@@ -1,4 +1,4 @@
-const Section = ({ title, content, backgroundColor, textColor }) => {
+const TextSection = ({ title, content, backgroundColor, textColor }) => {
   const sectionStyle = {
     backgroundColor: backgroundColor || 'bg-gray-100',
     color: textColor || 'text-gray-700',
@@ -15,4 +15,4 @@ const Section = ({ title, content, backgroundColor, textColor }) => {
   );
 };
 
-export default Section;
+export default TextSection;
