@@ -2,24 +2,22 @@
 
 import { useEffect, useState } from 'react';
 
+import { Loading } from '@/components';
 import Downloads from './downloads/Downloads';
 import ReleaseNotes from './downloads/ReleaseNotes';
 
 const DownloadSection = () => {
   const repo = 'ehsan18t/easy-mingw-installer';
   const [latestReleases, setLatestReleases] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   // fetch from github api
   // https://api.github.com/repos/ehsan18t/easy-mingw-installer/releases/latest
-
   useEffect(() => {
     // Fetch latest releases from GitHub API
     fetch(`https://api.github.com/repos/${repo}/releases/latest`)
       .then((response) => response.json())
       .then((data) => {
-        // Assuming the API response provides download URLs for different platforms
-        // Modify this according to the actual structure of the GitHub API response
-
-        //   save names as well
         const latestLinks = {
           description: data.body,
           published_at: data.published_at,
@@ -29,15 +27,23 @@ const DownloadSection = () => {
         };
 
         setLatestReleases(latestLinks);
+        setLoading(false);
       })
       .catch((error) => console.error('Error fetching data:', error));
   }, []);
 
   return (
-    <div id="download-section" className="mb-8">
-      <Downloads latestReleases={latestReleases} />
-      <ReleaseNotes repo={repo} latestRelease={latestReleases} />
-    </div>
+    <section id="download-section" className="mb-8">
+      <h2 className="mb-12 mt-12 text-center text-3xl font-semibold">Downloads</h2>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <Downloads latestReleases={latestReleases} />
+          <ReleaseNotes repo={repo} latestRelease={latestReleases} />
+        </>
+      )}
+    </section>
   );
 };
 
