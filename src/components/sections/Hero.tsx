@@ -1,11 +1,8 @@
 import { FaDownload, FaGithub } from 'react-icons/fa';
 
-const Hero = () => {
-  const jumpTo = (id) => {
-    const relevantElement = document.getElementById(id);
-    relevantElement.scrollIntoView({ behavior: 'smooth' });
-  };
+import { JumpButton } from '@/components';
 
+const Hero = () => {
   return (
     <div className="bg-gradient-to-r from-teal-900 to-blue-600 py-20 text-white">
       <div className="mx-auto text-center">
@@ -14,12 +11,12 @@ const Hero = () => {
           Simplify your MinGW setup with a seamless two-click installation experience.
         </p>
         <div className="mx-8 flex flex-col justify-center gap-2 md:flex-row">
-          <button
-            onClick={() => jumpTo('download-section')}
+          <JumpButton
+            jumpRef="download-section"
             className="inline-flex transform items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 px-8 py-3 text-white shadow-md transition duration-300 hover:scale-105 hover:shadow-lg">
             <FaDownload className="text-xl" />
             Download Now
-          </button>
+          </JumpButton>
           <a
             href="https://github.com/ehsan18t/easy-mingw-installer"
             target="_blank"

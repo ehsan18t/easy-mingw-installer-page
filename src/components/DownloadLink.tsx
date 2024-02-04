@@ -1,6 +1,11 @@
 import { FaDownload } from 'react-icons/fa';
 
-const DownloadLink = ({ platform, link }) => {
+type DownloadLinkProps = {
+  platform: string;
+  link: string;
+};
+
+const DownloadLink = ({ platform, link }: DownloadLinkProps) => {
   return (
     <a
       target="_blank"
