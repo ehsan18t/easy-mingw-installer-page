@@ -1,14 +1,11 @@
 import { MdNewReleases } from 'react-icons/md';
 
 import Markdown from '@/components/markdown/Markdown';
+import { Release } from '@/types/Release.interface';
 
 type ReleaseNotesProps = {
   repo: string;
-  latestRelease: {
-    published_at: string;
-    version: string;
-    description: string;
-  };
+  latestRelease: Release;
 };
 
 const ReleaseNotes = ({ repo, latestRelease }: ReleaseNotesProps) => {

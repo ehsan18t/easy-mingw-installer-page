@@ -1,10 +1,7 @@
 import { DownloadLink } from '@/components';
 
 type DownloadsProps = {
-  latestReleases: {
-    win64: string;
-    win32: string;
-  };
+  latestReleases: any;
 };
 
 const Downloads = ({ latestReleases }: DownloadsProps) => {

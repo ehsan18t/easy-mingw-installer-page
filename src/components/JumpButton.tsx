@@ -7,9 +7,9 @@ type JumpButtonProps = {
 };
 
 export default function JumpButton({ jumpRef, children, className }: JumpButtonProps) {
-  const jumpTo = (id) => {
+  const jumpTo = (id: string) => {
     const relevantElement = document.getElementById(id);
-    relevantElement.scrollIntoView({ behavior: 'smooth' });
+    relevantElement?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (

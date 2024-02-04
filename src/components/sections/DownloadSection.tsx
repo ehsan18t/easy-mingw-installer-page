@@ -4,12 +4,13 @@ import { useEffect, useState } from 'react';
 
 import { Loading } from '@/components';
 
+import { Release } from '@/types';
 import Downloads from './downloads/Downloads';
 import ReleaseNotes from './downloads/ReleaseNotes';
 
 const DownloadSection = () => {
   const repo = 'ehsan18t/easy-mingw-installer';
-  const [latestReleases, setLatestReleases] = useState([]);
+  const [latestReleases, setLatestReleases] = useState({} as Release);
   const [loading, setLoading] = useState(true);
 
   // fetch from github api
@@ -19,12 +20,14 @@ const DownloadSection = () => {
     fetch(`https://api.github.com/repos/${repo}/releases/latest`)
       .then((response) => response.json())
       .then((data) => {
-        const latestLinks = {
+        const latestLinks: Release = {
           description: data.body,
           published_at: data.published_at,
           version: data.tag_name,
-          win64: data.assets.find((asset) => asset.name.includes('64-bit')).browser_download_url,
-          win32: data.assets.find((asset) => asset.name.includes('32-bit')).browser_download_url,
+          win64: data.assets.find((asset: any) => asset.name.includes('64-bit'))
+            .browser_download_url,
+          win32: data.assets.find((asset: any) => asset.name.includes('32-bit'))
+            .browser_download_url,
         };
 
         setLatestReleases(latestLinks);
