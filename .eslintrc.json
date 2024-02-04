@@ -1,16 +1,7 @@
 {
-  "extends": [
-    "next/core-web-vitals",
-    "plugin:import/recommended",
-    "plugin:prettier/recommended"
-  ],
+  "extends": ["next/core-web-vitals", "plugin:import/recommended", "plugin:prettier/recommended"],
   "plugins": ["import"],
   "rules": {
-    "react-refresh/only-export-components": [
-      "warn",
-      { "allowConstantExport": true }
-    ],
-    "react/prop-types": "off",
     "import/order": [
       "warn",
       {
