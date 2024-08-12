@@ -1,16 +1,17 @@
 ---
+import { getRelease } from "@/api/get-release";
+import { Markdown } from "@/components";
 
+const release = await getRelease();
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<main class="max-w-4xl mx-auto p-6">
+  <h1 class="text-3xl font-bold">{release.name}</h1>
+  <h2 class="text-xl">{release.tagName}</h2>
+  <div class="mt-4">
+    <a href={release.url} class="text-blue-500 hover:underline"
+      >View on GitHub</a
+    >
+  </div>
+  <Markdown markdown={release.description} />
+</main>
