@@ -9,7 +9,7 @@ const iconClass = 'p-1 hover:ring-4 hover:text-white rounded-full ring-1 transit
   <div class="flex gap-4 items-center">
     <img
       src="/logo.png"
-      class="h-16"
+      class="h-12 md:h16"
       alt="logo"
     />
     <div class="flex flex-col border-l-4 border-cyan-700 pl-4">
@@ -24,12 +24,13 @@ const iconClass = 'p-1 hover:ring-4 hover:text-white rounded-full ring-1 transit
     </div>
   </div>
   <div class="flex gap-2 items-center">
-    <Icon name="discord-solid" size={30} title="Discord"
-          class={`${iconClass} text-indigo-700 ring-indigo-700  hover:ring-indigo-400 hover:bg-indigo-600`} />
-    <Icon name="telegram-solid" size={30} title="Telegram"
-          class={`${iconClass} text-sky-700 ring-sky-700 hover:ring-sky-400 hover:bg-sky-600`} />
-    <!--<Icon icon={FaXTwitter} />-->
-    <!--<Icon icon={FaFacebookF} />-->
-    {/* <Icon icon={FaInstagram} /> */}
+    <a target="_blank" href="https://discord.com/users/xcarl3t">
+      <Icon name="discord-solid" size={30} title="Discord"
+            class={`${iconClass} text-indigo-700 ring-indigo-700  hover:ring-indigo-400 hover:bg-indigo-600`} />
+    </a>
+    <a target="_blank" href="https://t.me/ehsan18t">
+      <Icon name="telegram-solid" size={30} title="Telegram"
+            class={`${iconClass} text-sky-700 ring-sky-700 hover:ring-sky-400 hover:bg-sky-600`} />
+    </a>
   </div>
 </footer>
