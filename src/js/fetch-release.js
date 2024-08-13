@@ -11,6 +11,11 @@ async function fetchRelease () {
   await fetch('https://api.github.com/repos/ehsan18t/easy-mingw-installer/releases/latest')
     .then(response => response.json())
     .then(data => {
+      // Download Links
+      document.getElementById('btn-dl-64').setAttribute('href', data.assets.find((asset) => asset.name.includes('64-bit')).browser_download_url)
+      document.getElementById('btn-dl-32').setAttribute('href', data.assets.find((asset) => asset.name.includes('32-bit')).browser_download_url)
+
+      // Release Markdown
       document.getElementById('release-version').innerHTML = `Released on ${data.tag_name}`
       document.getElementById('release').innerHTML = marked.parse(data.body)
       document.getElementById('release-date').innerHTML = 'Released on ' + formatDate(data.published_at)
