@@ -1,66 +1,66 @@
 ---
-import Release from "@/components/release/Release.astro";
-import Hero from "@/components/Hero.astro"
-import Motivation from "@/components/Motivation.astro"
-import Features from "@/components/Features.astro"
-import Downloads from "@/components/Downloads.astro";
-import Footer from "@/components/Footer.astro"
+import Release from '@/components/release/Release.astro';
+import Hero from '@/components/Hero.astro';
+import Motivation from '@/components/Motivation.astro';
+import Features from '@/components/Features.astro';
+import Downloads from '@/components/Downloads.astro';
+import Footer from '@/components/Footer.astro';
 
-import "@/styles/global.css"
+import '@/styles/global.css';
 ---
 
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator}>
-    <title>Easy MinGW Installer - 2 Click MinGW Installation for 64-bit & 32-bit</title>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width" />
+  <meta name="generator" content={Astro.generator}>
+  <title>Easy MinGW Installer - 2 Click MinGW Installation for 64-bit & 32-bit</title>
 
-    <!-- General -->
-    <meta name="description"
-          content="Easy MinGW Installer - 2 Click MinGW Installation for 64-bit & 32-bit. Simplify MinGW installation with just two clicks. Get both 64-bit and 32-bit support for easy development.">
-    <meta
-        name="keywords"
-        content="Easy MinGW Installer, MinGW, mingw w64, mingw64, mingw download, mingw install, mingw c compiler, mingw compiler, gcc compiler on windows, mingw for windows, mingw w64 install exe, mingw32, mingw w64 install, mingw w64 download, mingw32 make, mingw gcc, download mingw for windows, mingw install windows, mingw c++, mingw org, mingw installation manager, mingw gcc compiler for windows, mingw c++ compiler, mingw gcc compiler download, download mingw w64, mingw64 download 2 Click Installation, ehsan, ehsan18t, ehsan khan, 64-bit, 32-bit, Development Tools, Programming, Compiler, Setup, Simplified Installation">
-    <meta name="author" content="Ehsan Khan (ehsan18t)">
-    <meta name="robots" content="index, follow">
-    <meta name="theme" content="light">
+  <!-- General -->
+  <meta name="description"
+        content="Easy MinGW Installer - 2 Click MinGW Installation for 64-bit & 32-bit. Simplify MinGW installation with just two clicks. Get both 64-bit and 32-bit support for easy development.">
+  <meta
+    name="keywords"
+    content="Easy MinGW Installer, MinGW, mingw w64, mingw64, mingw download, mingw install, mingw c compiler, mingw compiler, gcc compiler on windows, mingw for windows, mingw w64 install exe, mingw32, mingw w64 install, mingw w64 download, mingw32 make, mingw gcc, download mingw for windows, mingw install windows, mingw c++, mingw org, mingw installation manager, mingw gcc compiler for windows, mingw c++ compiler, mingw gcc compiler download, download mingw w64, mingw64 download 2 Click Installation, ehsan, ehsan18t, ehsan khan, 64-bit, 32-bit, Development Tools, Programming, Compiler, Setup, Simplified Installation">
+  <meta name="author" content="Ehsan Khan (ehsan18t)">
+  <meta name="robots" content="index, follow">
+  <meta name="theme" content="light">
 
-    <!-- Open Graph tags for social media sharing -->
-    <meta
-        property="og:title"
-        content="Easy MinGW Installer - 2 Click MinGW Installation for 64-bit & 32-bit"
-    />
-    <meta
-        property="og:description"
-        content="Simplify your MinGW setup with the Easy MinGW Installer. Just two clicks to install MinGW with support for both 64-bit and 32-bit architectures."
-    />
-    <meta property="og:image" content="https://easymingw.vercel.app/preview.png" />
-    <meta property="og:url" content="https://easymingw.vercel.app" />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="en_US" />
+  <!-- Open Graph tags for social media sharing -->
+  <meta
+    property="og:title"
+    content="Easy MinGW Installer - 2 Click MinGW Installation for 64-bit & 32-bit"
+  />
+  <meta
+    property="og:description"
+    content="Simplify your MinGW setup with the Easy MinGW Installer. Just two clicks to install MinGW with support for both 64-bit and 32-bit architectures."
+  />
+  <meta property="og:image" content="https://easymingw.vercel.app/preview.png" />
+  <meta property="og:url" content="https://easymingw.vercel.app" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_US" />
 
-    <!-- Google SEO Metadata -->
-    <meta
-        name="google-site-verification"
-        content="0LljyKfvHJA-ff2Rc6d05iqFO975cEQBOBcbB989ipc"
-    />
+  <!-- Google SEO Metadata -->
+  <meta
+    name="google-site-verification"
+    content="0LljyKfvHJA-ff2Rc6d05iqFO975cEQBOBcbB989ipc"
+  />
 </head>
 <body>
-<main class="flex min-h-screen flex-col bg-gray-100">
-    <Hero />
-    <Motivation
-        title="Motivation"
-        content="I have created this project with the aim of providing an installer for MinGW, as I have observed that many people struggle with the setup and configuration of the MinGW environment. Often, newcomers give up at this stage due to its complexity. The purpose of this installer is to simplify the process and create a fully functional environment with the latest version of GCC and other essential packages for production."
-    />
-    <Features />
+<main class="flex min-h-screen flex-col">
+  <Hero />
+  <Motivation
+    title="Motivation"
+    content="I have created this project with the aim of providing an installer for MinGW, as I have observed that many people struggle with the setup and configuration of the MinGW environment. Often, newcomers give up at this stage due to its complexity. The purpose of this installer is to simplify the process and create a fully functional environment with the latest version of GCC and other essential packages for production."
+  />
+  <Features />
 
-    <section id="download-section" class="mx-4 mb-8 md:mx-8 lg:mx-12">
-        <Downloads />
-        <Release class="markdown mx-3 md:mx-6 lg:mx-10" />
-    </section>
-    <Footer />
+  <section id="download-section" class="mx-4 mb-8 md:mx-8 lg:mx-12">
+    <Downloads />
+    <Release class="markdown mx-3 md:mx-6 lg:mx-10" />
+  </section>
+  <Footer />
 </main>
 </body>
 </html>
