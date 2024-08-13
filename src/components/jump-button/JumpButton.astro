@@ -1,0 +1,22 @@
+---
+type JumpButtonProps = {
+    id: string,
+    jumpRef: string;
+    class?: string;
+};
+
+// noinspection JSUnusedGlobalSymbols
+const {id, jumpRef, class: className} = Astro.props as JumpButtonProps
+---
+
+<button id={id} class={className}>
+    <slot />
+</button>
+
+<script define:vars={{id, jumpRef}}>
+    const button = document.getElementById(id)
+    button?.addEventListener('click', () => {
+        document.getElementById(jumpRef)?.scrollIntoView({behavior: 'smooth'})
+        console.log(id, jumpRef)
+    })
+</script>
