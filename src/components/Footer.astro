@@ -1,15 +1,35 @@
 ---
-let year = new Date().getFullYear();
+import { Icon } from 'astro-icon/components';
+
+const year = new Date().getFullYear();
+const iconClass = 'p-1 hover:ring-4 hover:text-white rounded-full ring-1 transition ease-in-out duration-200';
 ---
-<footer class="flex w-full justify-center border-t-[1px] border-gray-200 bg-white p-4 text-gray-700">
-  <p class="text-xs">
-    &copy; 2023-{year} Easy MinGW Installer | Created by{' '}
-    <a
-      target="_blank"
-      class="text-xs text-emerald-800"
-      href="https://github.com/ehsan18t"
-      rel="noreferrer">
-      Ehsan Khan
-    </a>
-  </p>
+<footer class="py-1 flex justify-between items-center mx-4 border-t-[1px] border-cyan-600">
+
+  <div class="flex gap-4 items-center">
+    <img
+      src="/logo.png"
+      class="h-16"
+      alt="logo"
+    />
+    <div class="flex flex-col border-l-4 border-cyan-700 pl-4">
+      <p class="text-xs font-semibold text-cyan-600 p-0 m-0">© {year} Easy MinGW Installer</p>
+      <a
+        target="_blank"
+        class="text-xs text-emerald-600"
+        href="https://github.com/ehsan18t"
+        rel="noreferrer">
+        by Ehsan Khan
+      </a>
+    </div>
+  </div>
+  <div class="flex gap-2 items-center">
+    <Icon name="discord-solid" size={30} title="Discord"
+          class={`${iconClass} text-indigo-700 ring-indigo-700  hover:ring-indigo-400 hover:bg-indigo-600`} />
+    <Icon name="telegram-solid" size={30} title="Telegram"
+          class={`${iconClass} text-sky-700 ring-sky-700 hover:ring-sky-400 hover:bg-sky-600`} />
+    <!--<Icon icon={FaXTwitter} />-->
+    <!--<Icon icon={FaFacebookF} />-->
+    {/* <Icon icon={FaInstagram} /> */}
+  </div>
 </footer>
