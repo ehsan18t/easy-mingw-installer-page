@@ -6,3 +6,13 @@ body {
 .remove-underline {
     @apply no-underline visited:no-underline hover:no-underline focus:no-underline;
 }
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
