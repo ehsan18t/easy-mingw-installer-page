@@ -1,0 +1,29 @@
+---
+import "./styles.css";
+import { Icon } from "astro-icon/components";
+
+const { class: className } = Astro.props;
+---
+
+<div class='md:4 lg:6 rounded-lg bg-white p-2 shadow-md'>
+    <h1 class='flex items-center gap-3 text-3xl'>
+        <Icon name="new-releases" size={40} class="text-4xl text-green-500" />
+        Release v<span id="release-version"></span>
+    </h1>
+    <p id="release-date" class='px-3 text-gray-600 md:px-6 lg:px-10'></p>
+    <article class={className} id="release"></article>
+    <p class='mx-3 mb-8 mt-8 rounded-xl border-[1px] border-l-8 border-green-500 p-4 text-slate-600 md:mx-6 lg:mx-10'>
+        <span class='font-semibold'>Older Releases: </span>
+        Check on{' '}
+        <a
+            target='_blank'
+            href={`https://github.com/ehsan18t/easy-mingw-installer/releases`}
+            class='text-blue-500 hover:underline'
+            rel='noreferrer'>
+            GitHub
+        </a>
+    </p>
+</div>
+
+<script src="@/js/fetch-release.js"></script>
+

@@ -1,0 +1,8 @@
+body {
+    @apply bg-gray-100;
+    font-family: 'Roboto', sans-serif;
+}
+
+.remove-underline {
+    @apply no-underline visited:no-underline hover:no-underline focus:no-underline;
+}
