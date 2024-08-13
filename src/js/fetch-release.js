@@ -1,4 +1,4 @@
-import 'https://cdn.jsdelivr.net/npm/marked/marked.min.js';
+import './marked.min.js';
 
 const formatDate = (date) => {
   const releaseDate = new Date(date);
