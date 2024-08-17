@@ -13,7 +13,7 @@ const { id, jumpRef, class: className } = Astro.props as JumpButtonProps;
   <slot />
 </button>
 
-<script define:vars={{ id, jumpRef }}>
+<script define:vars={{ id, jumpRef }} is:inline>
   const button = document.getElementById(id);
   button?.addEventListener('click', () => {
     document.getElementById(jumpRef)?.scrollIntoView({ behavior: 'smooth' });
