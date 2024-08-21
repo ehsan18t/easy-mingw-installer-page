@@ -1,8 +1,11 @@
+/* enhanced-markdown.css */
+
 :root {
     --primary-color: #0366d6;
     --secondary-color: #24292e;
     --background-color: #f6f8fa;
     --text-color: #24292e;
+    --muted-text-color: #6a737d;
     --border-color: #e1e4e8;
     --code-bg-color: #f1f8ff;
     --code-text-color: #005cc5;
@@ -10,19 +13,31 @@
     --blockquote-bg-color: #f6f8fa;
     --link-color: #0366d6;
     --link-hover-color: #005cc5;
+    --focus-outline-color: #3b99fc;
     --border-radius: 6px;
     --font-size-base: 16px;
-    --line-height-base: 1.6;
+    --line-height-base: 1.7;
     --font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 }
 
-/* Headings */
+body {
+    font-family: var(--font-family);
+    color: var(--text-color);
+    line-height: var(--line-height-base);
+    font-size: var(--font-size-base);
+    background-color: white;
+    padding: 2rem;
+    margin: 0;
+    transition: background-color 0.3s, color 0.3s;
+}
+
 h1, h2, h3, h4, h5, h6 {
     color: var(--secondary-color);
     margin-top: 1.5rem;
     margin-bottom: 1rem;
     line-height: 1.25;
     font-weight: 600;
+    transition: color 0.3s;
 }
 
 h1 {
@@ -54,20 +69,26 @@ p {
     color: var(--text-color);
 }
 
-/* Links */
 a {
     color: var(--link-color);
     text-decoration: none;
     border-bottom: 1px dashed var(--link-color);
-    transition: color 0.2s, border-bottom-color 0.2s;
+    transition: color 0.2s, border-bottom-color 0.2s, background-color 0.2s;
+    outline: none;
 }
 
 a:hover, a:focus {
     color: var(--link-hover-color);
     border-bottom-color: var(--link-hover-color);
+    background-color: rgba(3, 102, 214, 0.1);
+    border-radius: var(--border-radius);
 }
 
-/* Code Blocks */
+a:focus {
+    outline: 2px solid var(--focus-outline-color);
+    outline-offset: 2px;
+}
+
 code {
     background-color: var(--code-bg-color);
     color: var(--code-text-color);
@@ -75,6 +96,7 @@ code {
     border-radius: var(--border-radius);
     font-family: "Courier New", Courier, monospace;
     font-size: 0.875rem;
+    transition: background-color 0.3s;
 }
 
 pre {
@@ -86,30 +108,39 @@ pre {
     font-family: "Courier New", Courier, monospace;
     font-size: 0.875rem;
     line-height: 1.5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
 }
 
-pre code {
-    background: none;
-    color: inherit;
-    padding: 0;
+pre:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Blockquotes */
 blockquote {
     margin: 1rem 0;
-    padding: 1rem;
+    padding: 1rem 1.5rem;
     background-color: var(--blockquote-bg-color);
-    border-left: 4px solid var(--blockquote-border-color);
+    border-left: 6px solid var(--blockquote-border-color);
     color: var(--text-color);
     border-radius: var(--border-radius);
+    position: relative;
+}
+
+blockquote::before {
+    content: "“";
+    font-size: 4rem;
+    color: var(--blockquote-border-color);
+    position: absolute;
+    top: -0.75rem;
+    left: 1rem;
+    line-height: 1;
 }
 
 blockquote p {
     margin: 0;
-    color: var(--text-color);
+    color: var(--muted-text-color);
 }
 
-/* Lists */
 ul, ol {
     padding-left: 1.5rem;
     margin: 1rem 0;
@@ -127,7 +158,6 @@ ol {
     list-style-type: decimal;
 }
 
-/* Tables */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -136,6 +166,7 @@ table {
     border-radius: var(--border-radius);
     overflow: hidden;
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
 }
 
 th, td {
@@ -147,17 +178,22 @@ th, td {
 th {
     background-color: var(--background-color);
     font-weight: 600;
+    color: var(--secondary-color);
+}
+
+td {
+    transition: background-color 0.3s;
 }
 
 tbody tr:hover {
     background-color: var(--background-color);
 }
 
-/* Horizontal Rule */
 hr {
     border: 0;
     height: 1px;
     background: var(--border-color);
     margin: 2rem 0;
     opacity: 0.5;
+    transition: opacity 0.3s;
 }
