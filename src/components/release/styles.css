@@ -1,199 +1,103 @@
-/* enhanced-markdown.css */
-
-:root {
-    --primary-color: #0366d6;
-    --secondary-color: #24292e;
-    --background-color: #f6f8fa;
-    --text-color: #24292e;
-    --muted-text-color: #6a737d;
-    --border-color: #e1e4e8;
-    --code-bg-color: #f1f8ff;
-    --code-text-color: #005cc5;
-    --blockquote-border-color: #dfe2e5;
-    --blockquote-bg-color: #f6f8fa;
-    --link-color: #0366d6;
-    --link-hover-color: #005cc5;
-    --focus-outline-color: #3b99fc;
-    --border-radius: 6px;
-    --font-size-base: 16px;
-    --line-height-base: 1.7;
-    --font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+.markdown-body h1 {
+    @apply text-4xl font-semibold text-gray-800 my-6;
 }
 
-body {
-    font-family: var(--font-family);
-    color: var(--text-color);
-    line-height: var(--line-height-base);
-    font-size: var(--font-size-base);
-    background-color: white;
-    padding: 2rem;
-    margin: 0;
-    transition: background-color 0.3s, color 0.3s;
+.markdown-body h2 {
+    @apply text-3xl font-semibold text-gray-800 my-5;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    color: var(--secondary-color);
-    margin-top: 1.5rem;
-    margin-bottom: 1rem;
-    line-height: 1.25;
-    font-weight: 600;
-    transition: color 0.3s;
+.markdown-body h3 {
+    @apply text-2xl font-semibold text-gray-800 my-4;
 }
 
-h1 {
-    font-size: 2rem;
+.markdown-body h4 {
+    @apply text-xl font-semibold text-gray-800 my-3;
 }
 
-h2 {
-    font-size: 1.75rem;
+.markdown-body h5 {
+    @apply text-lg font-semibold text-gray-800 my-2;
 }
 
-h3 {
-    font-size: 1.5rem;
+.markdown-body h6 {
+    @apply text-base font-semibold text-gray-800 my-1;
 }
 
-h4 {
-    font-size: 1.25rem;
+/* Paragraphs */
+.markdown-body p {
+    @apply text-gray-900 my-2;
 }
 
-h5 {
-    font-size: 1rem;
+/* Links */
+.markdown-body a {
+    @apply text-blue-600 border-b border-dashed border-blue-600 transition duration-200 ease-in-out;
 }
 
-h6 {
-    font-size: 0.875rem;
+.markdown-body a:hover {
+    @apply text-blue-800 border-blue-800 bg-blue-100 rounded;
 }
 
-p {
-    margin: 0.5rem 0;
-    color: var(--text-color);
+.markdown-body a:focus {
+    @apply outline-none ring-2 ring-blue-400 ring-offset-2 rounded;
 }
 
-a {
-    color: var(--link-color);
-    text-decoration: none;
-    border-bottom: 1px dashed var(--link-color);
-    transition: color 0.2s, border-bottom-color 0.2s, background-color 0.2s;
-    outline: none;
+/* Code and Preformatted Text */
+.markdown-body code {
+    @apply bg-blue-50 text-blue-800 px-1 py-0.5 rounded text-sm;
 }
 
-a:hover, a:focus {
-    color: var(--link-hover-color);
-    border-bottom-color: var(--link-hover-color);
-    background-color: rgba(3, 102, 214, 0.1);
-    border-radius: var(--border-radius);
+.markdown-body pre {
+    @apply bg-blue-50 text-blue-800 p-4 rounded overflow-auto text-sm leading-relaxed shadow transition duration-300 ease-in-out;
 }
 
-a:focus {
-    outline: 2px solid var(--focus-outline-color);
-    outline-offset: 2px;
+.markdown-body pre:hover {
+    @apply shadow-lg;
 }
 
-code {
-    background-color: var(--code-bg-color);
-    color: var(--code-text-color);
-    padding: 0.2rem 0.4rem;
-    border-radius: var(--border-radius);
-    font-family: "Courier New", Courier, monospace;
-    font-size: 0.875rem;
-    transition: background-color 0.3s;
+/* Blockquotes */
+.markdown-body blockquote {
+    @apply my-4 p-4 bg-gray-50 border-l-4 border-gray-300 text-gray-700 rounded relative;
 }
 
-pre {
-    background-color: var(--code-bg-color);
-    color: var(--code-text-color);
-    padding: 1rem;
-    border-radius: var(--border-radius);
-    overflow-x: auto;
-    font-family: "Courier New", Courier, monospace;
-    font-size: 0.875rem;
-    line-height: 1.5;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s;
-}
-
-pre:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-blockquote {
-    margin: 1rem 0;
-    padding: 1rem 1.5rem;
-    background-color: var(--blockquote-bg-color);
-    border-left: 6px solid var(--blockquote-border-color);
-    color: var(--text-color);
-    border-radius: var(--border-radius);
-    position: relative;
-}
-
-blockquote::before {
+.markdown-body blockquote::before {
     content: "“";
-    font-size: 4rem;
-    color: var(--blockquote-border-color);
-    position: absolute;
-    top: -0.75rem;
-    left: 1rem;
-    line-height: 1;
+    @apply text-6xl text-gray-300 absolute top-0 left-2 -mt-2 leading-none;
 }
 
-blockquote p {
-    margin: 0;
-    color: var(--muted-text-color);
+.markdown-body blockquote p {
+    @apply my-0 text-gray-600;
 }
 
-ul, ol {
-    padding-left: 1.5rem;
-    margin: 1rem 0;
+/* Lists */
+.markdown-body ul, .markdown-body ol {
+    @apply pl-6 my-4 list-inside;
 }
 
-li {
-    margin: 0.5rem 0;
+.markdown-body ul {
+    @apply list-disc;
 }
 
-ul {
-    list-style-type: disc;
+.markdown-body ol {
+    @apply list-decimal;
 }
 
-ol {
-    list-style-type: decimal;
+/* Tables */
+.markdown-body table {
+    @apply w-full border-collapse my-4 bg-white rounded shadow overflow-hidden;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 1rem 0;
-    background-color: var(--background-color);
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s;
+.markdown-body th {
+    @apply bg-gray-100 text-left px-4 py-3 font-semibold text-gray-700;
 }
 
-th, td {
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid var(--border-color);
-    text-align: left;
+.markdown-body td {
+    @apply border-t border-gray-200 px-4 py-3 text-left;
 }
 
-th {
-    background-color: var(--background-color);
-    font-weight: 600;
-    color: var(--secondary-color);
+.markdown-body tbody tr:hover {
+    @apply bg-gray-50;
 }
 
-td {
-    transition: background-color 0.3s;
-}
-
-tbody tr:hover {
-    background-color: var(--background-color);
-}
-
-hr {
-    border: 0;
-    height: 1px;
-    background: var(--border-color);
-    margin: 2rem 0;
-    opacity: 0.5;
-    transition: opacity 0.3s;
+/* Horizontal Rules */
+.markdown-body hr {
+    @apply border-none h-px bg-gray-300 my-8 opacity-50 transition-opacity duration-300;
 }
