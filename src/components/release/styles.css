@@ -1,3 +1,9 @@
+.markdown-body {
+    @apply text-gray-900;
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Headings */
 .markdown-body h1 {
     @apply text-4xl font-semibold text-gray-800 my-6;
 }
@@ -101,3 +107,4 @@
 .markdown-body hr {
     @apply border-none h-px bg-gray-300 my-8 opacity-50 transition-opacity duration-300;
 }
+
