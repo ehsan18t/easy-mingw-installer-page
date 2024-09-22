@@ -1,10 +1,10 @@
 ---
-import Release from '@/components/release/Release.astro';
+import Downloads from '@/components/Downloads.astro';
+import Features from '@/components/Features.astro';
+import Footer from '@/components/Footer.astro';
 import Hero from '@/components/Hero.astro';
 import Motivation from '@/components/Motivation.astro';
-import Features from '@/components/Features.astro';
-import Downloads from '@/components/Downloads.astro';
-import Footer from '@/components/Footer.astro';
+import Release from '@/components/release/Release.astro';
 import { Icon } from 'astro-icon/components';
 
 import '@/styles/global.css';
@@ -14,8 +14,7 @@ import '@/styles/global.css';
 <head>
   <meta charset="utf-8" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <meta name="viewport" content="width=device-width" />
-  <meta name="generator" content={Astro.generator}>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Easy MinGW Installer - 2 Click MinGW Installation for 64-bit & 32-bit</title>
 
   <!-- General -->
@@ -29,6 +28,7 @@ import '@/styles/global.css';
   <meta name="theme" content="light">
 
   <!-- Open Graph tags for social media sharing -->
+  <meta property="og:site_name" content="Easy MinGW Installer" />
   <meta
     property="og:title"
     content="Easy MinGW Installer - 2 Click MinGW Installation for 64-bit & 32-bit"
