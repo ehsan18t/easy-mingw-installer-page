@@ -7,16 +7,8 @@ const formatDate = (date: string) => {
   })} ${releaseDate.getFullYear()}`;
 };
 
-// Your GitHub repository URL
+// GitHub repository URL
 const repoUrl = "https://github.com/ehsan18t/easy-mingw-installer/commit/";
-
-// Function to convert commit hashes in the Markdown to clickable links
-function convertCommitHashesToLinks(markdown: string): string {
-  const hashRegex = /\b([a-f0-9]{40})\b/g; // Matches 40-character commit hashes
-  return markdown.replace(hashRegex, (hash) => {
-    return `[${hash}](${repoUrl}${hash})`;
-  });
-}
 
 async function fetchRelease() {
   await fetch(
@@ -45,13 +37,20 @@ async function fetchRelease() {
         "release-version"
       )!.innerHTML = `Release v${data.tag_name}`;
       // Preprocess Markdown to replace commit hashes with links
+      // Process Markdown for changelog
       const processedMarkdown = data.body.replace(
-        /\b([a-f0-9]{40})\b/g,
-        (hash: string) =>
-          `<a href="${repoUrl}${hash}" class="commit-link" target="_blank">${hash.slice(
-            0,
-            7
-          )}</a>`
+        /```[\s\S]*?```|`[^`]+`|([a-f0-9]{40})/g,
+        (match: any, hash: string) => {
+          // If it's a full hash and not inside a code block or inline code
+          if (hash) {
+            return `<a href="${repoUrl}${hash}" class="commit-link" target="_blank">${hash.slice(
+              0,
+              7
+            )}</a>`;
+          }
+          // Return code blocks or inline code unchanged
+          return match;
+        }
       );
 
       // Parse the processed Markdown and add it to the page
