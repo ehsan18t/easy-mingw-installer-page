@@ -7,6 +7,17 @@ const formatDate = (date: string) => {
   })} ${releaseDate.getFullYear()}`;
 };
 
+// Your GitHub repository URL
+const repoUrl = "https://github.com/ehsan18t/easy-mingw-installer/commit/";
+
+// Function to convert commit hashes in the Markdown to clickable links
+function convertCommitHashesToLinks(markdown: string): string {
+  const hashRegex = /\b([a-f0-9]{40})\b/g; // Matches 40-character commit hashes
+  return markdown.replace(hashRegex, (hash) => {
+    return `[${hash}](${repoUrl}${hash})`;
+  });
+}
+
 async function fetchRelease() {
   await fetch(
     "https://api.github.com/repos/ehsan18t/easy-mingw-installer/releases/latest"
@@ -33,9 +44,22 @@ async function fetchRelease() {
       document.getElementById(
         "release-version"
       )!.innerHTML = `Release v${data.tag_name}`;
-      document.getElementById("release")!.innerHTML = await marked.parse(
-        data.body
+      // Preprocess Markdown to replace commit hashes with links
+      const processedMarkdown = data.body.replace(
+        /\b([a-f0-9]{40})\b/g,
+        (hash: string) =>
+          `<a href="${repoUrl}${hash}" class="commit-link" target="_blank">${hash.slice(
+            0,
+            7
+          )}</a>`
       );
+
+      // Parse the processed Markdown and add it to the page
+      document.getElementById("release")!.innerHTML = await marked.parse(
+        processedMarkdown
+      );
+
+      // document.getElementById('release')!.innerHTML = await marked.parse(data.body);
       document.getElementById("release-date")!.innerHTML =
         "Released on " + formatDate(data.published_at);
 
