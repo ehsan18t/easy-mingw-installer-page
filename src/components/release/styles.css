@@ -47,7 +47,7 @@
 }
 
 .markdown-body a.commit-link {
-  @apply text-blue-600 font-mono transition-colors duration-200 text-xs p-0.5 rounded;
+  @apply text-blue-600 bg-blue-50 font-mono transition-colors duration-200 text-xs p-0.5 rounded;
 }
 
 .markdown-body a.commit-link:hover {
