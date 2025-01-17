@@ -1,110 +1,110 @@
 .markdown-body {
-    @apply text-gray-900;
-    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  @apply text-gray-900;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 }
 
 /* Headings */
 .markdown-body h1 {
-    @apply text-4xl font-semibold text-gray-800 my-6;
+  @apply text-4xl font-semibold text-gray-800 my-6;
 }
 
 .markdown-body h2 {
-    @apply text-3xl font-semibold text-gray-800 my-5;
+  @apply text-3xl font-semibold text-gray-800 my-5;
 }
 
 .markdown-body h3 {
-    @apply text-2xl font-semibold text-gray-800 my-4;
+  @apply text-2xl font-semibold text-gray-800 my-4;
 }
 
 .markdown-body h4 {
-    @apply text-xl font-semibold text-gray-800 my-3;
+  @apply text-xl font-semibold text-gray-800 my-3;
 }
 
 .markdown-body h5 {
-    @apply text-lg font-semibold text-gray-800 my-2;
+  @apply text-lg font-semibold text-gray-800 my-2;
 }
 
 .markdown-body h6 {
-    @apply text-base font-semibold text-gray-800 my-1;
+  @apply text-base font-semibold text-gray-800 my-1;
 }
 
 /* Paragraphs */
 .markdown-body p {
-    @apply text-gray-900 my-2;
+  @apply text-gray-900 my-2;
 }
 
 /* Links */
-.markdown-body a {
-    @apply text-blue-600 border-b border-dashed border-blue-600 transition duration-200 ease-in-out;
+.markdown-body a:not(.commit-link) {
+  @apply text-blue-600 border-b border-dashed border-blue-600 transition duration-200 ease-in-out;
 }
 
-.markdown-body a:hover {
-    @apply text-blue-800 border-blue-800 bg-blue-100 rounded;
+.markdown-body a:not(.commit-link):hover {
+  @apply text-blue-800 border-blue-800 bg-blue-100 rounded;
 }
 
-.markdown-body a:focus {
-    @apply outline-none ring-2 ring-blue-400 ring-offset-2 rounded;
+.markdown-body a:not(.commit-link):focus {
+  @apply outline-none ring-2 ring-blue-400 ring-offset-2 rounded;
 }
 
 /* Code and Preformatted Text */
 .markdown-body code {
-    @apply bg-blue-50 text-blue-800 px-1 py-0.5 rounded text-sm;
+  @apply bg-blue-50 text-blue-800 px-1 py-0.5 rounded text-sm;
 }
 
 .markdown-body pre {
-    @apply bg-blue-50 text-blue-800 p-4 rounded overflow-auto text-sm leading-relaxed shadow transition duration-300 ease-in-out;
+  @apply bg-blue-50 text-blue-800 p-4 rounded overflow-auto text-sm leading-relaxed shadow transition duration-300 ease-in-out;
 }
 
 .markdown-body pre:hover {
-    @apply shadow-lg;
+  @apply shadow-lg;
 }
 
 /* Blockquotes */
 .markdown-body blockquote {
-    @apply my-4 p-4 bg-gray-50 border-l-4 border-gray-300 text-gray-700 rounded relative;
+  @apply my-4 p-4 bg-gray-50 border-l-4 border-gray-300 text-gray-700 rounded relative;
 }
 
 .markdown-body blockquote::before {
-    content: "“";
-    @apply text-6xl text-gray-300 absolute top-0 left-2 -mt-2 leading-none;
+  content: "“";
+  @apply text-6xl text-gray-300 absolute top-0 left-2 -mt-2 leading-none;
 }
 
 .markdown-body blockquote p {
-    @apply my-0 text-gray-600;
+  @apply my-0 text-gray-600;
 }
 
 /* Lists */
-.markdown-body ul, .markdown-body ol {
-    @apply pl-6 my-4 list-inside;
+.markdown-body ul,
+.markdown-body ol {
+  @apply pl-6 my-4 list-inside;
 }
 
 .markdown-body ul {
-    @apply list-disc;
+  @apply list-disc;
 }
 
 .markdown-body ol {
-    @apply list-decimal;
+  @apply list-decimal;
 }
 
 /* Tables */
 .markdown-body table {
-    @apply w-full border-collapse my-4 bg-white rounded shadow overflow-hidden;
+  @apply w-full border-collapse my-4 bg-white rounded shadow overflow-hidden;
 }
 
 .markdown-body th {
-    @apply bg-gray-100 text-left px-4 py-3 font-semibold text-gray-700;
+  @apply bg-gray-100 text-left px-4 py-3 font-semibold text-gray-700;
 }
 
 .markdown-body td {
-    @apply border-t border-gray-200 px-4 py-3 text-left;
+  @apply border-t border-gray-200 px-4 py-3 text-left;
 }
 
 .markdown-body tbody tr:hover {
-    @apply bg-gray-50;
+  @apply bg-gray-50;
 }
 
 /* Horizontal Rules */
 .markdown-body hr {
-    @apply border-none h-px bg-gray-300 my-8 opacity-50 transition-opacity duration-300;
+  @apply border-none h-px bg-gray-300 my-8 opacity-50 transition-opacity duration-300;
 }
-
