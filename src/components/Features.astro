@@ -1,0 +1,24 @@
+---
+import FeatureCard from './FeatureCard.astro';
+---
+
+<section class="mx-4 mb-6 mt-6 flex flex-col justify-between md:mx-8 lg:mx-12">
+  <h2 class="mb-8 text-center text-3xl font-semibold">Features</h2>
+  <div class="grid grid-cols-1 gap-4 md:gap-6 lg:gap-8 md:grid-cols-2 lg:grid-cols-3">
+    <FeatureCard
+      title="Easy Installation"
+      description="Simplify the process of setting up MinGW with just two clicks."
+      icon="check_circle"
+    />
+    <FeatureCard
+      title="Latest GCC Version"
+      description="Get access to the latest version of GCC for enhanced development."
+      icon="code"
+    />
+    <FeatureCard
+      title="Essential Packages"
+      description="Included essential packages to kickstart your production environment."
+      icon="box_open"
+    />
+  </div>
+</section>

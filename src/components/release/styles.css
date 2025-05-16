@@ -1,0 +1,120 @@
+@reference "@/styles/global.css";
+
+.markdown-body {
+  @apply text-gray-900;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Headings */
+.markdown-body h1 {
+  @apply my-6 text-4xl font-semibold text-gray-800;
+}
+
+.markdown-body h2 {
+  @apply my-5 text-3xl font-semibold text-gray-800;
+}
+
+.markdown-body h3 {
+  @apply my-4 text-2xl font-semibold text-gray-800;
+}
+
+.markdown-body h4 {
+  @apply my-3 text-xl font-semibold text-gray-800;
+}
+
+.markdown-body h5 {
+  @apply my-2 text-lg font-semibold text-gray-800;
+}
+
+.markdown-body h6 {
+  @apply my-1 text-base font-semibold text-gray-800;
+}
+
+/* Paragraphs */
+.markdown-body p {
+  @apply my-2 text-gray-900;
+}
+
+/* Links */
+.markdown-body a:not(.commit-link) {
+  @apply border-b border-dashed border-blue-600 text-blue-600 transition duration-200 ease-in-out;
+}
+
+.markdown-body a:not(.commit-link):hover {
+  @apply rounded border-blue-800 bg-blue-100 text-blue-800;
+}
+
+.markdown-body a:not(.commit-link):focus {
+  @apply rounded ring-2 ring-blue-400 ring-offset-2 outline-none;
+}
+
+.markdown-body a.commit-link {
+  @apply rounded bg-blue-50 p-0.5 font-mono text-xs text-blue-600 transition-colors duration-200;
+}
+
+.markdown-body a.commit-link:hover {
+  @apply border-blue-800 bg-blue-100 text-blue-800;
+}
+
+/* Code and Preformatted Text */
+.markdown-body code {
+  @apply rounded bg-blue-50 px-1 py-0.5 text-sm text-blue-800;
+}
+
+.markdown-body pre {
+  @apply overflow-auto rounded bg-blue-50 p-4 text-sm leading-relaxed text-blue-800 shadow transition duration-300 ease-in-out;
+}
+
+.markdown-body pre:hover {
+  @apply shadow-lg;
+}
+
+/* Blockquotes */
+.markdown-body blockquote {
+  @apply relative my-4 rounded border-l-4 border-gray-300 bg-gray-50 p-4 text-gray-700;
+}
+
+.markdown-body blockquote::before {
+  content: "“";
+  @apply absolute top-0 left-2 -mt-2 text-6xl leading-none text-gray-300;
+}
+
+.markdown-body blockquote p {
+  @apply my-0 text-gray-600;
+}
+
+/* Lists */
+.markdown-body ul,
+.markdown-body ol {
+  @apply my-4 list-inside pl-6;
+}
+
+.markdown-body ul {
+  @apply list-disc;
+}
+
+.markdown-body ol {
+  @apply list-decimal;
+}
+
+/* Tables */
+.markdown-body table {
+  @apply my-4 w-full border-collapse overflow-hidden rounded bg-white shadow;
+}
+
+.markdown-body th {
+  @apply bg-gray-100 px-4 py-3 text-left font-semibold text-gray-700;
+}
+
+.markdown-body td {
+  @apply border-t border-gray-200 px-4 py-3 text-left;
+}
+
+.markdown-body tbody tr:hover {
+  @apply bg-gray-50;
+}
+
+/* Horizontal Rules */
+.markdown-body hr {
+  @apply my-8 h-px border-none bg-gray-300 opacity-50 transition-opacity duration-300;
+}

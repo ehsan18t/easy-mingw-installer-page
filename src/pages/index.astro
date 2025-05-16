@@ -1,7 +1,33 @@
 ---
+import Downloads from "@/components/Downloads.astro";
+import Features from "@/components/Features.astro";
+import Footer from "@/components/Footer.astro";
+import Hero from "@/components/Hero.astro";
+import Motivation from "@/components/Motivation.astro";
+import Release from "@/components/release/Release.astro";
 import MainLayout from "@/layouts/MainLayout.astro";
+import { Icon } from "astro-icon/components";
 ---
 
 <MainLayout>
-  <div class="rounded bg-blue-500 p-4 text-white transition duration-200 hover:bg-blue-600">Hello world</div>
+  <main class="flex min-h-screen flex-col">
+    <Hero />
+    <Motivation
+      title="Motivation"
+      content="I have created this project with the aim of providing an installer for MinGW, as I have observed that many people struggle with the setup and configuration of the MinGW environment. Often, newcomers give up at this stage due to its complexity. The purpose of this installer is to simplify the process and create a fully functional environment with the latest version of GCC and other essential packages for production."
+    />
+    <Features />
+
+    <section id="download-section" class="mx-4 mb-8 md:mx-8 lg:mx-12">
+      <h2 class="mt-12 mb-12 text-center text-3xl font-semibold">Downloads</h2>
+      <div id="loading" class="flex items-center justify-center">
+        <Icon name="180-ring" size={200} class="text-blue-500" />
+      </div>
+      <div id="downloads" style="animation: fadeIn 1s;" class="hidden">
+        <Downloads />
+        <Release class="markdown mx-3 md:mx-6 lg:mx-10" />
+      </div>
+    </section>
+    <Footer />
+  </main>
 </MainLayout>
