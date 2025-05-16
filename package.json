@@ -1,25 +1,25 @@
 {
   "name": "easy-mingw-installer-page",
-  "version": "0.0.1",
   "type": "module",
+  "version": "1.1.0",
   "scripts": {
     "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro check && astro build",
+    "build": "astro build",
     "preview": "astro preview",
-    "build-and-preview": "astro check && astro build && astro preview",
     "astro": "astro"
   },
-  "overrides": {
-    "@iconify/tools": "^4.0.0"
-  },
   "dependencies": {
-    "@astrojs/check": "0.9.4",
-    "@astrojs/tailwind": "^5.1.5",
-    "astro": "5.1.7",
+    "@astrojs/sitemap": "^3.4.0",
+    "@astrojs/vercel": "^8.1.4",
+    "@tailwindcss/vite": "^4.1.7",
+    "astro": "^5.7.13",
     "astro-icon": "^1.1.5",
-    "marked": "^14.1.4",
-    "tailwindcss": "^3.4.17",
-    "typescript": "^5.7.3"
+    "marked": "^15.0.11",
+    "tailwindcss": "^4.1.7"
+  },
+  "devDependencies": {
+    "prettier": "^3.5.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "^0.6.11"
   }
 }
