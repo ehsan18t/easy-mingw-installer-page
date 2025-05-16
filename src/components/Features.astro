@@ -1,24 +1,21 @@
 ---
-import FeatureCard from './FeatureCard.astro';
+import FeatureCard from "./FeatureCard.astro";
 ---
 
-<section class="mx-4 mb-6 mt-6 flex flex-col justify-between md:mx-8 lg:mx-12">
-  <h2 class="mb-8 text-center text-3xl font-semibold">Features</h2>
-  <div class="grid grid-cols-1 gap-4 md:gap-6 lg:gap-8 md:grid-cols-2 lg:grid-cols-3">
-    <FeatureCard
-      title="Easy Installation"
-      description="Simplify the process of setting up MinGW with just two clicks."
-      icon="check_circle"
-    />
-    <FeatureCard
-      title="Latest GCC Version"
-      description="Get access to the latest version of GCC for enhanced development."
-      icon="code"
-    />
-    <FeatureCard
-      title="Essential Packages"
-      description="Included essential packages to kickstart your production environment."
-      icon="box_open"
-    />
+<section class="bg-white py-16">
+  <div class="container mx-auto px-4">
+    <div class="mb-12 text-center">
+      <span class="mb-2 inline-block text-sm font-medium tracking-wider text-blue-600 uppercase">Why Choose This</span>
+      <h2 class="text-3xl font-bold text-gray-800 md:text-4xl">Key Features</h2>
+      <div class="mx-auto mt-3 h-1 w-20 rounded-full bg-blue-500"></div>
+      <p class="mx-auto mt-4 max-w-2xl text-gray-600">Everything you need for a seamless MinGW development experience</p>
+    </div>
+
+    <div class="mx-auto grid gap-6 px-4 md:grid-cols-2 md:px-0 lg:grid-cols-4">
+      <FeatureCard icon="check-outline" title="Simple Installation" description="Install MinGW with just two simple clicks. No complicated configuration required." />
+      <FeatureCard icon="code" title="Latest GCC Compiler" description="Always includes the latest stable version of the GCC compiler suite for optimal performance." />
+      <FeatureCard icon="settings" title="Automatic PATH Config" description="System PATH is automatically configured, so you can start coding immediately after installation." />
+      <FeatureCard icon="box_open" title="Essential Packages" description="Included essential packages to kickstart your production environment." />
+    </div>
   </div>
 </section>
