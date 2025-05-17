@@ -16,6 +16,21 @@ interface GitHubRelease {
   assets: GitHubAsset[];
 }
 
+interface ProcessedReleaseData {
+  latestVersion: string;
+  latestReleaseDate: string;
+  latestReleaseBody: string;
+  totalDownloads: number;
+  asset64bit?: {
+    downloadUrl: string;
+    fileSize: string;
+  };
+  asset32bit?: {
+    downloadUrl: string;
+    fileSize: string;
+  };
+}
+
 // Configuration
 const CONFIG = {
   repoOwner: "ehsan18t",
@@ -39,20 +54,103 @@ class ReleaseManager {
   private repoUrl: string;
 
   constructor() {
-    this.repoUrl = `https://github.com/${CONFIG.repoOwner}/${CONFIG.repoName}/commit/`;
+    this.repoUrl = `https://github.com/${CONFIG.repoOwner}/${CONFIG.repoName}/`;
   }
 
   /**
-   * Fetch releases from GitHub or cache
+   * Extract and process only the needed information from releases
    */
-  async getReleases(): Promise<GitHubRelease[]> {
-    // Check for cached data
-    const cachedData = this.getCachedReleases();
+  private processReleaseData(releases: GitHubRelease[]): ProcessedReleaseData {
+    const latestRelease = releases[0];
+    const totalDownloads = this.calculateTotalDownloads(releases);
+
+    const processedData: ProcessedReleaseData = {
+      latestVersion: latestRelease.tag_name,
+      latestReleaseDate: formatDate(latestRelease.published_at),
+      latestReleaseBody: latestRelease.body,
+      totalDownloads,
+    };
+
+    // Find and process assets
+    if (latestRelease.assets && Array.isArray(latestRelease.assets)) {
+      const asset64bit = latestRelease.assets.find((asset) =>
+        asset.name.includes("64-bit"),
+      );
+
+      const asset32bit = latestRelease.assets.find((asset) =>
+        asset.name.includes("32-bit"),
+      );
+
+      if (asset64bit) {
+        processedData.asset64bit = {
+          downloadUrl: asset64bit.browser_download_url,
+          fileSize: `${formatFileSize(asset64bit.size)} MB`,
+        };
+      }
+
+      if (asset32bit) {
+        processedData.asset32bit = {
+          downloadUrl: asset32bit.browser_download_url,
+          fileSize: `${formatFileSize(asset32bit.size)} MB`,
+        };
+      }
+    }
+
+    return processedData;
+  }
+
+  /**
+   * Get cached processed release data if available and not expired
+   */
+  private getCachedReleaseData(): ProcessedReleaseData | null {
+    try {
+      const cacheKey = `${CONFIG.repoOwner}_${CONFIG.repoName}_processed_data`;
+      const cacheItem = localStorage.getItem(cacheKey);
+      if (!cacheItem) return null;
+
+      const { timestamp, data } = JSON.parse(cacheItem);
+      const now = new Date().getTime();
+
+      // Check if cache is expired
+      if (now - timestamp > CONFIG.cacheExpiry) {
+        return null;
+      }
+
+      return data as ProcessedReleaseData;
+    } catch (error) {
+      // If there's any error reading cache, ignore and fetch fresh data
+      return null;
+    }
+  }
+
+  /**
+   * Cache processed release data in localStorage
+   */
+  private cacheProcessedData(data: ProcessedReleaseData): void {
+    try {
+      const cacheItem = {
+        timestamp: new Date().getTime(),
+        data,
+      };
+
+      const cacheKey = `${CONFIG.repoOwner}_${CONFIG.repoName}_processed_data`;
+      localStorage.setItem(cacheKey, JSON.stringify(cacheItem));
+    } catch (error) {
+      // Ignore cache errors - not critical
+      console.warn("Could not cache release data:", error);
+    }
+  }
+  /**
+   * Get release data - either from cache or from API
+   */
+  async getReleaseData(): Promise<ProcessedReleaseData> {
+    // Check for cached processed data
+    const cachedData = this.getCachedReleaseData();
     if (cachedData) {
       return cachedData;
     }
 
-    // Fetch fresh data
+    // Fetch and process fresh data
     const apiUrl = `https://api.github.com/repos/${CONFIG.repoOwner}/${CONFIG.repoName}/releases`;
     const response = await fetch(apiUrl);
 
@@ -66,53 +164,11 @@ class ReleaseManager {
       throw new Error("No releases found");
     }
 
-    // Cache the releases
-    this.cacheReleases(releases);
-    return releases;
-  }
+    // Process and cache the data
+    const processedData = this.processReleaseData(releases);
+    this.cacheProcessedData(processedData);
 
-  /**
-   * Get cached releases if available and not expired
-   */
-  private getCachedReleases(): GitHubRelease[] | null {
-    try {
-      const cacheItem = localStorage.getItem(
-        `${CONFIG.repoOwner}_${CONFIG.repoName}_releases`,
-      );
-      if (!cacheItem) return null;
-
-      const { timestamp, data } = JSON.parse(cacheItem);
-      const now = new Date().getTime();
-
-      // Check if cache is expired
-      if (now - timestamp > CONFIG.cacheExpiry) {
-        return null;
-      }
-
-      return data as GitHubRelease[];
-    } catch (error) {
-      // If there's any error reading cache, ignore and fetch fresh data
-      return null;
-    }
-  }
-
-  /**
-   * Cache releases in localStorage
-   */
-  private cacheReleases(releases: GitHubRelease[]): void {
-    try {
-      const cacheItem = {
-        timestamp: new Date().getTime(),
-        data: releases,
-      };
-      localStorage.setItem(
-        `${CONFIG.repoOwner}_${CONFIG.repoName}_releases`,
-        JSON.stringify(cacheItem),
-      );
-    } catch (error) {
-      // Ignore cache errors - not critical
-      console.warn("Could not cache releases:", error);
-    }
+    return processedData;
   }
 
   /**
@@ -139,7 +195,7 @@ class ReleaseManager {
       /```[\s\S]*?```|`[^`]+`|([a-f0-9]{40})/g,
       (match: string, hash?: string) => {
         if (hash) {
-          return `<a href="${this.repoUrl}${hash}" class="commit-link" target="_blank" rel="noreferrer">${hash.slice(0, 7)}</a>`;
+          return `<a href="commit/${this.repoUrl}${hash}" class="commit-link" target="_blank" rel="noreferrer">${hash.slice(0, 7)}</a>`;
         }
         return match;
       },
@@ -147,16 +203,16 @@ class ReleaseManager {
   }
 
   /**
-   * Update UI elements with release data
+   * Update UI elements with processed release data
    */
-  updateUI(releases: GitHubRelease[]): void {
+  updateUI(data: ProcessedReleaseData): void {
     // Get elements from DOM once to improve performance
     const elements = {
       downloadCount: document.getElementById("download-count"),
       btn64: document.getElementById("btn-dl-64"),
       btn32: document.getElementById("btn-dl-32"),
-      fileSize64: document.getElementById("file-size-64-bit"),
-      fileSize32: document.getElementById("file-size-32-bit"),
+      fileSize64: document.getElementById("file-size-64"),
+      fileSize32: document.getElementById("file-size-32"),
       release: document.getElementById("release"),
       releaseDate: document.getElementById("release-date"),
       loading: document.getElementById("loading"),
@@ -164,56 +220,39 @@ class ReleaseManager {
       versionElements: document.querySelectorAll(".version"),
     };
 
-    // The latest release is the first one
-    const latestRelease = releases[0];
-
     // Update total downloads
-    const totalDownloads = this.calculateTotalDownloads(releases);
-    const formattedDownloads = new Intl.NumberFormat().format(totalDownloads);
-
+    const formattedDownloads = new Intl.NumberFormat().format(
+      data.totalDownloads,
+    );
     if (elements.downloadCount) {
       elements.downloadCount.textContent = `${formattedDownloads} downloads`;
     }
 
-    // Find assets for download links
-    if (latestRelease.assets && Array.isArray(latestRelease.assets)) {
-      const asset64bit = latestRelease.assets.find((asset) =>
-        asset.name.includes("64-bit"),
-      );
-      const asset32bit = latestRelease.assets.find((asset) =>
-        asset.name.includes("32-bit"),
-      );
-
-      // Update download URLs
-      if (asset64bit && elements.btn64) {
-        elements.btn64.setAttribute("href", asset64bit.browser_download_url);
+    // Update download URLs and file sizes
+    if (data.asset64bit && elements.btn64) {
+      elements.btn64.setAttribute("href", data.asset64bit.downloadUrl);
+      if (elements.fileSize64) {
+        elements.fileSize64.textContent = data.asset64bit.fileSize;
       }
+    }
 
-      if (asset32bit && elements.btn32) {
-        elements.btn32.setAttribute("href", asset32bit.browser_download_url);
-      }
-
-      // Update file sizes
-      if (asset64bit && elements.fileSize64) {
-        elements.fileSize64.textContent = `${formatFileSize(asset64bit.size)} MB`;
-      }
-
-      if (asset32bit && elements.fileSize32) {
-        elements.fileSize32.textContent = `${formatFileSize(asset32bit.size)} MB`;
+    if (data.asset32bit && elements.btn32) {
+      elements.btn32.setAttribute("href", data.asset32bit.downloadUrl);
+      if (elements.fileSize32) {
+        elements.fileSize32.textContent = data.asset32bit.fileSize;
       }
     }
 
     // Update version display
     elements.versionElements.forEach((el) => {
-      el.textContent = `v${latestRelease.tag_name}`;
+      el.textContent = `v${data.latestVersion}`;
     });
 
     // Update release content
     if (elements.release) {
-      // Use createDocumentFragment for better performance when adding multiple elements
       const renderMarkdown = async () => {
         const processedMarkdown = this.processReleaseMarkdown(
-          latestRelease.body,
+          data.latestReleaseBody,
         );
         const parsedHTML = await marked.parse(processedMarkdown);
         if (elements.release) {
@@ -221,7 +260,6 @@ class ReleaseManager {
         }
       };
 
-      // Use requestAnimationFrame to optimize rendering
       window.requestAnimationFrame(() => {
         renderMarkdown().catch(console.error);
       });
@@ -230,7 +268,7 @@ class ReleaseManager {
     // Update release date
     if (elements.releaseDate) {
       elements.releaseDate.textContent =
-        "Released on " + formatDate(latestRelease.published_at);
+        "Released on " + data.latestReleaseDate;
     }
 
     // Remove loading indicator
@@ -292,8 +330,8 @@ async function initializeReleaseInfo() {
   const manager = new ReleaseManager();
 
   try {
-    const releases = await manager.getReleases();
-    manager.updateUI(releases);
+    const releaseData = await manager.getReleaseData();
+    manager.updateUI(releaseData);
   } catch (error) {
     manager.showError(
       error instanceof Error ? error : new Error("Unknown error occurred"),
