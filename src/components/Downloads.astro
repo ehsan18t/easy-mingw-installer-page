@@ -1,24 +1,22 @@
 ---
+import { Icon } from "astro-icon/components";
 import DownloadLink from "./DownloadLink.astro";
 ---
 
-<div id="download-section" class="relative overflow-hidden py-10">
-  <div class="relative container mx-auto px-4 py-8">
-    <div class="mb-12 text-center">
-      <span class="inline-block rounded-full bg-blue-100 px-4 py-1.5 text-sm font-semibold text-blue-700">Ready to Install</span>
-      <h2 class="mt-4 text-3xl font-extrabold text-gray-800 md:text-4xl">
-        Get MinGW Installer
-        <span class="relative inline-block">
-          Now
-          <span class="absolute -bottom-2 left-0 h-1.5 w-full rounded-full bg-gradient-to-r from-blue-600 to-indigo-500"></span>
-        </span>
-      </h2>
-      <p class="mx-auto mt-4 max-w-2xl text-lg text-gray-600">Choose the version that matches your system architecture for the best performance</p>
+<div class="rounded-2xl border border-gray-100 py-8">
+  <!-- Section header -->
+  <div class="mb-8 text-center">
+    <div class="mb-2 inline-flex items-center justify-center gap-2 text-blue-600">
+      <Icon name="mdi:cloud-download-outline" size={24} />
+      <span class="font-medium">Ready To Install</span>
     </div>
+    <h2 class="text-2xl font-bold text-gray-800 md:text-3xl">Choose Your Version</h2>
+    <p class="mx-auto mt-2 max-w-2xl text-gray-600">Select the appropriate version for your system. Both versions include the latest GCC compiler and essential development tools.</p>
+  </div>
 
-    <div class="flex flex-col items-center justify-center gap-8 md:flex-row md:gap-10">
-      <DownloadLink id="btn-dl-64" platform="Windows 64-bit" />
-      <DownloadLink id="btn-dl-32" platform="Windows 32-bit" />
-    </div>
+  <!-- Download cards container -->
+  <div class="flex flex-col items-center justify-center gap-6 md:flex-row md:gap-8">
+    <DownloadLink id="btn-dl-64" platform="Windows 64-bit" />
+    <DownloadLink id="btn-dl-32" platform="Windows 32-bit" />
   </div>
 </div>

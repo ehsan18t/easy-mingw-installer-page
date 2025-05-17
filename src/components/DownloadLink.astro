@@ -4,75 +4,70 @@ import { Icon } from "astro-icon/components";
 type DownloadLinkProps = {
   id: string;
   platform: string;
-  fileSize?: string;
-  version?: string;
+  icon?: string;
 };
 
-const { id, platform } = Astro.props as DownloadLinkProps;
-
-// Determine icon based on platform
-const platformIcon = platform.toLowerCase().includes("64") ? "simple-icons:windows" : "simple-icons:windows";
+// Set defaults for optional props
+const { id, platform, icon = platform.toLowerCase().includes("64") ? "mdi:cpu-64-bit" : "mdi:cpu-32-bit" } = Astro.props as DownloadLinkProps;
+const bit = platform.toLowerCase().includes("64") ? "64-bit" : "32-bit";
 ---
 
-<a id={id} target="_blank" class="download-card group w-full cursor-pointer px-4 transition-transform duration-300 hover:scale-[1.02] md:px-3 lg:w-[340px]" rel="noreferrer">
-  <div class="relative overflow-hidden rounded-xl border border-indigo-100/50 bg-white shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/10">
+<a id={id} target="_blank" class="download-card group w-full max-w-sm px-4 transition-transform duration-300 hover:-translate-y-1 md:px-2" rel="noreferrer">
+  <div class="relative h-full overflow-hidden rounded-xl border border-indigo-100/50 bg-white shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/10">
     <!-- Top border gradient -->
-    <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-blue-500"></div>
+    <div class="absolute inset-x-0 top-0 z-10 h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-blue-500"></div>
 
     <!-- Floating particle decoration -->
     <div class="absolute -top-4 -right-4 h-16 w-16 rounded-full bg-blue-500/10 blur-xl"></div>
     <div class="absolute -bottom-4 -left-4 h-16 w-16 rounded-full bg-indigo-500/10 blur-xl"></div>
 
-    <!-- Header with platform info -->
+    <!-- Header with light gradient background from new design -->
     <div class="flex items-center gap-4 border-b border-gray-100 bg-gradient-to-r from-blue-50 to-indigo-50/50 p-6">
-      <div class="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 text-white shadow-md transition-all duration-300 group-hover:shadow-lg group-hover:shadow-blue-500/30">
-        <Icon name={platformIcon} size={28} class="transition-transform duration-300 group-hover:scale-110" />
+      <!-- Keeping the circular icon from current design -->
+      <div class="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 text-white shadow-md transition-all duration-300 group-hover:shadow-lg group-hover:shadow-blue-500/30">
+        <Icon name={icon} size={28} class="transition-transform duration-300 group-hover:scale-110" />
       </div>
       <div>
-        <h3 class="text-xl font-bold text-gray-800">{platform}</h3>
-        <p class="text-sm font-medium text-blue-600">MinGW Installer <span class="version"></span></p>
+        <h3 class="text-xl font-bold text-gray-800">MinGW Installer {bit}</h3>
+        <p class="version text-sm font-medium text-blue-600"></p>
       </div>
     </div>
 
-    <!-- Content section -->
-    <div class="flex flex-col justify-between gap-5 p-6">
-      <div class="space-y-3">
-        <div class="flex items-center justify-between">
-          <span class="text-sm font-medium text-gray-500">File size</span>
-          <span id={`file-size-${platform.includes("64") ? "64" : "32"}`} class="font-semibold text-gray-700"></span>
+    <!-- Card body -->
+    <div class="p-6">
+      <div class="mb-4">
+        <div class="mb-2 flex items-center justify-between">
+          <span class="text-sm text-gray-600">File size</span>
+          <span id={`file-size-${bit}`} class="text-sm font-medium text-gray-800"></span>
         </div>
 
         <div class="flex items-center justify-between">
-          <span class="text-sm font-medium text-gray-500">Architecture</span>
-          <span class="font-semibold text-gray-700">
-            {platform.includes("64") ? "x86_64" : "x86"}
-          </span>
+          <span class="text-sm text-gray-600">Architecture</span>
+          <span class="text-sm font-medium text-gray-800">{bit.includes("64") ? "x86_64" : "x86"}</span>
         </div>
 
         <div class="flex items-center justify-between">
-          <span class="text-sm font-medium text-gray-500">Compiler</span>
-          <span class="font-semibold text-gray-700">GCC</span>
+          <span class="text-sm text-gray-600">Compiler</span>
+          <span class="text-sm font-medium text-gray-800">GCC</span>
         </div>
 
         <div class="flex items-center justify-between">
-          <span class="text-sm font-medium text-gray-500">Thread Model</span>
-          <span class="font-semibold text-gray-700">POSIX</span>
+          <span class="text-sm text-gray-600">Thread Model</span>
+          <span class="text-sm font-medium text-gray-800">POSIX</span>
         </div>
 
         <div class="flex items-center justify-between">
-          <span class="text-sm font-medium text-gray-500">Runtime</span>
-          <span class="font-semibold text-gray-700">UCRT</span>
+          <span class="text-sm text-gray-600">Runtime</span>
+          <span class="text-sm font-medium text-gray-800">UCRT</span>
         </div>
       </div>
 
+      <!-- Download button with enhanced animations -->
       <button
-        class="download-btn relative cursor-pointer overflow-hidden rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-3 text-center font-medium text-white shadow-md transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/30 focus:ring-2 focus:ring-blue-500/50 focus:outline-none"
+        class="flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg px-4 py-3 transition-colors duration-300 group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-indigo-600 group-hover:text-white pointer-coarse:bg-gradient-to-r pointer-coarse:from-blue-600 pointer-coarse:to-indigo-600 pointer-coarse:text-white pointer-fine:bg-blue-50 pointer-fine:text-blue-600"
       >
-        <span class="shimmer absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent"></span>
-        <div class="relative z-10 flex items-center justify-center gap-2">
-          <Icon name="download" size={18} class="download-icon" />
-          <span>Download Now</span>
-        </div>
+        <Icon name="download" size={20} class="group-hover:animate-bounce" />
+        <span class="font-medium">Download Now</span>
       </button>
     </div>
   </div>
@@ -80,7 +75,27 @@ const platformIcon = platform.toLowerCase().includes("64") ? "simple-icons:windo
 
 <style>
   .download-card {
-    text-decoration: none;
+    position: relative;
+    z-index: 1;
+  }
+
+  .download-card::after {
+    content: "";
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    width: 90%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(59, 130, 246, 0.3), rgba(99, 102, 241, 0.3));
+    border-radius: 0.75rem;
+    z-index: -1;
+    opacity: 0;
+    transform: translateX(-50%);
+    transition: all 0.4s ease-out;
+  }
+
+  .download-card:hover::after {
+    opacity: 1;
   }
 
   .download-btn:hover .shimmer {
