@@ -2,7 +2,7 @@
 const { title, content } = Astro.props;
 ---
 
-<section class="relative pt-28 pb-20">
+<section class="relative py-20">
   <div class="relative z-10 container mx-auto mt-8 max-w-4xl px-4">
     <div class="relative rounded-2xl border border-gray-100/70 bg-white/90 p-8 shadow-lg backdrop-blur-sm md:p-12">
       <!-- Decorative elements -->
@@ -27,26 +27,38 @@ const { title, content } = Astro.props;
         </div>
 
         <!-- Enhanced Quote Box -->
-        <div class="relative max-w-3xl rounded-xl border border-gray-100 bg-white p-6 shadow-inner md:p-8">
-          <!-- Decorative quotation marks -->
-          <div class="absolute -top-6 -left-3 font-serif text-7xl text-blue-400/20">"</div>
-          <div class="absolute -right-3 -bottom-16 rotate-180 font-serif text-7xl text-blue-400/20">"</div>
+        <div class="relative mx-auto max-w-3xl rounded-xl border border-gray-100 bg-white p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] md:p-8">
+          <!-- SVG quotation marks -->
+          <svg class="absolute -right-6 -bottom-6 h-12 w-12 text-blue-300/30" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path
+              d="M11.9906 8.3125C11.9906 6.42188 10.4687 4.9 8.57812 4.9C6.6875 4.9 5.14062 6.42188 5.14062 8.3125C5.14062 10.2031 6.6875 11.725 8.57812 11.725C8.87501 11.725 9.17189 11.6719 9.46876 11.5656C9.20314 12.9781 8.15626 14.2344 6.79688 14.9781C6.6875 15.0312 6.63125 15.1375 6.63125 15.2438C6.63125 15.2969 6.6875 15.4031 6.74376 15.4562L7.63439 16.1469C7.69064 16.2 7.79689 16.2531 7.90314 16.2531C7.95939 16.2531 8.01564 16.2531 8.01564 16.2C10.1531 15.0844 11.9906 12.5062 11.9906 9.64062V8.3125Z"
+            ></path>
+            <path
+              d="M19.4156 11.7781C19.7125 11.7781 20.0094 11.725 20.3063 11.6188C20.0406 13.0313 18.9938 14.2875 17.6344 15.0313C17.525 15.0844 17.4688 15.1906 17.4688 15.2969C17.4688 15.35 17.525 15.4563 17.5813 15.5094L18.4719 16.2C18.5281 16.2531 18.6344 16.3063 18.7406 16.3063C18.7969 16.3063 18.8531 16.3063 18.8531 16.2531C21.0344 15.1375 22.8719 12.5594 22.8719 9.69375V8.36563C22.8719 6.475 21.35 4.95313 19.4594 4.95313C17.5688 4.95313 16.0469 6.475 16.0469 8.36563C16 10.2563 17.525 11.7781 19.4156 11.7781Z"
+            ></path>
+          </svg>
 
-          <p class="px-4 text-center text-lg leading-relaxed font-light text-gray-700 md:text-xl">
+          <svg class="absolute -top-6 -left-6 h-12 w-12 rotate-180 text-blue-300/30" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path
+              d="M11.9906 8.3125C11.9906 6.42188 10.4687 4.9 8.57812 4.9C6.6875 4.9 5.14062 6.42188 5.14062 8.3125C5.14062 10.2031 6.6875 11.725 8.57812 11.725C8.87501 11.725 9.17189 11.6719 9.46876 11.5656C9.20314 12.9781 8.15626 14.2344 6.79688 14.9781C6.6875 15.0312 6.63125 15.1375 6.63125 15.2438C6.63125 15.2969 6.6875 15.4031 6.74376 15.4562L7.63439 16.1469C7.69064 16.2 7.79689 16.2531 7.90314 16.2531C7.95939 16.2531 8.01564 16.2531 8.01564 16.2C10.1531 15.0844 11.9906 12.5062 11.9906 9.64062V8.3125Z"
+            ></path>
+            <path
+              d="M19.4156 11.7781C19.7125 11.7781 20.0094 11.725 20.3063 11.6188C20.0406 13.0313 18.9938 14.2875 17.6344 15.0313C17.525 15.0844 17.4688 15.1906 17.4688 15.2969C17.4688 15.35 17.525 15.4563 17.5813 15.5094L18.4719 16.2C18.5281 16.2531 18.6344 16.3063 18.7406 16.3063C18.7969 16.3063 18.8531 16.3063 18.8531 16.2531C21.0344 15.1375 22.8719 12.5594 22.8719 9.69375V8.36563C22.8719 6.475 21.35 4.95313 19.4594 4.95313C17.5688 4.95313 16.0469 6.475 16.0469 8.36563C16 10.2563 17.525 11.7781 19.4156 11.7781Z"
+            ></path>
+          </svg>
+
+          <p class="md:text-md text-center text-sm leading-relaxed text-gray-700 italic">
             {content}
           </p>
         </div>
+      </div>
 
-        <!-- Enhanced Author signature -->
-        <div class="mt-6 flex items-center gap-4 rounded-full border border-blue-100 bg-gradient-to-r from-blue-50 to-indigo-50 px-6 py-3">
-          <div class="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 font-bold text-white shadow-md">
-            <span class="text-lg">E</span>
-          </div>
-          <div>
-            <div class="font-semibold text-gray-800">Ehsan Khan</div>
-            <div class="text-sm text-blue-600">Project Creator</div>
-          </div>
-        </div>
+      <!-- Minimalist Text-Only Signature -->
+      <div class="w-full py-2 text-right">
+        <p class="text-sm text-gray-600">
+          <span class="font-medium text-gray-700">— Ehsan Khan</span>
+          <span class="ml-1 text-xs text-blue-600">(Project Creator)</span>
+        </p>
       </div>
     </div>
   </div>
