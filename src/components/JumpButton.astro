@@ -1,22 +1,20 @@
 ---
 type JumpButtonProps = {
-  id: string,
+  id: string;
   jumpRef: string;
   class?: string;
 };
 
-// noinspection JSUnusedGlobalSymbols
 const { id, jumpRef, class: className } = Astro.props as JumpButtonProps;
 ---
 
-<button id={id} class={className}>
+<button id={id} class={`cursor-pointer remove-focus ${className}`}>
   <slot />
 </button>
 
 <script define:vars={{ id, jumpRef }} is:inline>
   const button = document.getElementById(id);
-  button?.addEventListener('click', () => {
-    document.getElementById(jumpRef)?.scrollIntoView({ behavior: 'smooth' });
-    console.log(id, jumpRef);
+  button?.addEventListener("click", () => {
+    document.getElementById(jumpRef)?.scrollIntoView({ behavior: "smooth" });
   });
 </script>

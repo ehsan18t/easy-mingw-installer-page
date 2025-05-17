@@ -14,6 +14,22 @@ body {
   @apply no-underline visited:no-underline hover:no-underline focus:no-underline;
 }
 
+.remove-focus:focus {
+  outline: none !important;
+}
+
+.remove-focus:focus-visible {
+  outline: none !important;
+}
+
+.remove-focus:-moz-focusring {
+  outline: none !important;
+}
+
+.remove-focus::-moz-focus-inner {
+  border: 0 !important;
+}
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
