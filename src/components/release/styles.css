@@ -6,46 +6,121 @@
   line-height: 1.6;
 }
 
-/* Headings */
-.markdown-body h1 {
-  @apply my-6 border-b border-gray-100 pb-2 text-3xl font-bold text-gray-800;
+/* Base styles for all headings */
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  @apply font-bold tracking-tight text-gray-800;
 }
 
+/* Major heading (h1) with gradient underline */
+.markdown-body h1 {
+  @apply relative mb-6 pb-4 text-3xl md:text-4xl;
+  letter-spacing: -0.02em;
+  border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+.markdown-body h1::after {
+  content: "";
+  @apply absolute bottom-0 left-0 h-[3px] w-32 rounded-full;
+  background: linear-gradient(
+    to right,
+    rgba(59, 130, 246, 0.8),
+    rgba(99, 102, 241, 0.8),
+    rgba(59, 130, 246, 0.4)
+  );
+  transform: translateY(2px);
+}
+
+/* Secondary heading (h2) with side accent */
 .markdown-body h2 {
-  @apply relative my-5 text-2xl font-bold text-gray-800;
+  @apply relative pb-4 text-2xl md:text-3xl;
+  letter-spacing: -0.015em;
+  padding-top: 0.15rem;
+  margin-left: -0.75rem;
 }
 
 .markdown-body h2::after {
   content: "";
-  @apply absolute -bottom-1 left-0 h-0.5 w-16 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500;
+  @apply absolute right-0 bottom-0 left-0 h-[2px] rounded-full bg-gradient-to-r from-blue-400/60 to-indigo-400/60;
+  width: 100%;
 }
 
+/* Tertiary heading (h3) with small underline accent */
 .markdown-body h3 {
-  @apply my-4 text-xl font-semibold text-gray-800;
+  @apply relative inline-flex items-center pb-1 text-xl md:text-2xl;
+  letter-spacing: -0.01em;
 }
 
+.markdown-body h3::after {
+  content: "";
+  @apply absolute right-0 bottom-0 left-0 h-[2px] rounded-full bg-gradient-to-r from-blue-500/60 to-indigo-500/60;
+  width: 3rem;
+}
+
+/* Fourth level heading with dot accent */
 .markdown-body h4 {
-  @apply my-3 text-lg font-semibold text-gray-800;
+  @apply flex items-center gap-2 text-lg md:text-xl;
 }
 
-/* Paragraphs */
+.markdown-body h4::before {
+  content: "";
+  @apply inline-block h-1.5 w-1.5 flex-shrink-0 rounded-full bg-blue-500;
+}
+
+/* Fifth level heading */
+.markdown-body h5 {
+  @apply text-base font-semibold text-blue-800 md:text-lg;
+}
+
+/* Sixth level heading */
+.markdown-body h6 {
+  @apply text-sm font-medium tracking-wide text-indigo-700 uppercase md:text-base;
+}
+
+/* Add spacing after headings when followed by content */
+.markdown-body h1 + p,
+.markdown-body h2 + p,
+.markdown-body h3 + p,
+.markdown-body h4 + p,
+.markdown-body h5 + p,
+.markdown-body h6 + p,
+.markdown-body h1 + ul,
+.markdown-body h2 + ul,
+.markdown-body h3 + ul,
+.markdown-body h4 + ul,
+.markdown-body h5 + ul,
+.markdown-body h6 + ul,
+.markdown-body h1 + ol,
+.markdown-body h2 + ol,
+.markdown-body h3 + ol,
+.markdown-body h4 + ol,
+.markdown-body h5 + ol,
+.markdown-body h6 + ol {
+  margin-top: 1rem;
+}
+
+/* Paragraphs with improved readability */
 .markdown-body p {
   @apply my-4 leading-relaxed text-gray-700;
 }
 
-/* Links */
+/* Polished link styling */
 .markdown-body a:not(.commit-link) {
-  @apply border-b border-blue-200 text-blue-600 transition-colors duration-200 hover:border-blue-500 hover:text-blue-700;
+  @apply text-blue-600 underline decoration-blue-200/60 underline-offset-2 transition-all duration-200 hover:text-blue-700 hover:decoration-blue-500;
 }
 
 .markdown-body a.commit-link {
-  @apply inline-flex items-center rounded bg-blue-50 px-2 py-0.5 font-mono text-xs text-blue-600 transition-colors hover:bg-blue-100;
+  @apply inline-flex items-center rounded border border-blue-100/80 bg-blue-50 px-2.5 py-0.5 font-mono text-xs text-blue-600 no-underline transition-colors hover:bg-blue-100;
 }
 
-/* Lists */
+/* Enhanced lists */
 .markdown-body ul,
 .markdown-body ol {
-  @apply my-4 space-y-2 pl-6;
+  @apply my-5 space-y-2 pl-6;
 }
 
 .markdown-body ul {
@@ -58,15 +133,19 @@
 
 .markdown-body li {
   @apply leading-relaxed text-gray-700;
+  padding-left: 0.5rem;
 }
 
-/* Code and Preformatted Text */
+/* Professional code styling */
 .markdown-body code {
-  @apply rounded bg-blue-50 px-1.5 py-0.5 font-mono text-sm text-blue-700;
+  @apply rounded border border-blue-100/50 bg-blue-50 px-1.5 py-0.5 font-mono text-sm text-blue-700;
 }
 
 .markdown-body pre {
-  @apply my-5 overflow-x-auto rounded-lg border border-blue-100 bg-blue-50 p-4;
+  @apply my-6 overflow-x-auto rounded-lg border border-blue-100 bg-blue-50/80 p-5 backdrop-blur-sm;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.6),
+    0 2px 4px rgba(0, 0, 0, 0.05);
   scrollbar-width: thin; /* Firefox */
   scrollbar-color: rgba(99, 102, 241, 0.3) rgba(219, 234, 254, 0.5); /* Firefox */
 }
@@ -77,21 +156,31 @@
 }
 
 .markdown-body pre::-webkit-scrollbar-track {
-  @apply rounded-b-lg bg-blue-50/80;
+  @apply rounded-b-lg bg-blue-50/50;
 }
 
 .markdown-body pre::-webkit-scrollbar-thumb {
-  @apply rounded-full bg-blue-300/50;
+  @apply rounded-full bg-blue-300/60;
   border: 1px solid rgba(219, 234, 254, 0.5);
+  background-image: linear-gradient(
+    to right,
+    rgba(99, 102, 241, 0.2),
+    rgba(59, 130, 246, 0.2)
+  );
 }
 
 .markdown-body pre::-webkit-scrollbar-thumb:hover {
   @apply bg-indigo-400/50;
+  background-image: linear-gradient(
+    to right,
+    rgba(99, 102, 241, 0.4),
+    rgba(59, 130, 246, 0.4)
+  );
 }
 
 /* Make sure code inside pre doesn't add double styling */
 .markdown-body pre code {
-  @apply block bg-transparent p-0 text-blue-700;
+  @apply block border-0 bg-transparent p-0 text-blue-700;
   scrollbar-width: none; /* Hide nested scrollbars in Firefox */
 }
 
@@ -99,53 +188,93 @@
   display: none; /* Hide nested scrollbars in Webkit */
 }
 
-/* Blockquotes */
+/* Refined blockquotes */
 .markdown-body blockquote {
-  @apply my-6 rounded-r-lg border-l-4 border-blue-300 bg-blue-50 py-2 pr-4 pl-4 text-gray-700 italic;
+  @apply my-6 rounded-r-lg border-l-4 border-blue-400 bg-blue-50/80 px-5 py-3 text-gray-700 italic;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.6),
+    0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-/* Tables */
+/* Professional tables */
 .markdown-body table {
-  @apply my-6 w-full border-collapse overflow-hidden rounded-lg shadow-sm;
+  @apply my-6 w-full border-collapse overflow-hidden rounded-lg border border-blue-100/80;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+.markdown-body thead {
+  @apply bg-gradient-to-r from-blue-50 to-blue-50/80;
 }
 
 .markdown-body th {
-  @apply border-b border-blue-100 bg-blue-50 p-3 text-left font-semibold text-gray-700;
+  @apply border-b border-blue-100 p-3 text-left font-semibold text-gray-700;
 }
 
 .markdown-body td {
-  @apply border-b border-gray-100 p-3 text-gray-700;
+  @apply border-b border-blue-50 p-3 text-gray-700;
 }
 
 .markdown-body tr:last-child td {
   @apply border-b-0;
 }
 
+.markdown-body tbody tr {
+  @apply transition-colors;
+}
+
 .markdown-body tbody tr:hover {
-  @apply bg-blue-50/50;
+  @apply bg-blue-50/40;
 }
 
-/* Horizontal Rules */
+/* Refined horizontal rules */
 .markdown-body hr {
-  @apply my-8 h-px border-0 bg-gradient-to-r from-blue-100 via-blue-300 to-indigo-100;
+  @apply my-8 h-px border-0;
+  background-image: linear-gradient(
+    to right,
+    rgba(219, 234, 254, 0.1),
+    rgba(99, 102, 241, 0.3),
+    rgba(219, 234, 254, 0.1)
+  );
 }
 
-/* Strong/Bold */
+/* Enhanced text formatting */
 .markdown-body strong {
-  @apply font-semibold text-blue-800;
+  @apply font-semibold text-blue-900;
 }
 
-/* Emphasis/Italic */
 .markdown-body em {
   @apply text-gray-700 italic;
 }
 
-/* Images */
+/* Improved images */
 .markdown-body img {
-  @apply my-4 max-w-full rounded-lg border border-gray-100 shadow-sm;
+  @apply my-6 max-w-full rounded-lg border border-blue-100/80 shadow-sm;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 /* Feature highlights */
 .markdown-body ul li::marker {
   @apply text-blue-500;
+}
+
+/* Added details/summary styling */
+.markdown-body details {
+  @apply my-4 rounded-lg border border-blue-100 bg-white;
+}
+
+.markdown-body summary {
+  @apply cursor-pointer bg-blue-50/70 px-4 py-2 font-medium text-blue-700;
+}
+
+.markdown-body details[open] summary {
+  @apply border-b border-blue-100;
+}
+
+.markdown-body details > *:not(summary) {
+  @apply px-4 py-2;
+}
+
+/* Keyboard shortcuts */
+.markdown-body kbd {
+  @apply mx-1 rounded-md border border-gray-200 bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-700 shadow-sm;
 }
