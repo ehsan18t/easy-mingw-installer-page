@@ -2,8 +2,6 @@
 import { Image } from "astro:assets";
 import logo from "@/assets/logo.png";
 import { Icon } from "astro-icon/components";
-
-const year = new Date().getFullYear();
 ---
 
 <footer class="relative overflow-hidden border-t border-blue-100 bg-gradient-to-b from-white to-blue-50/40 pt-12 pb-8">
@@ -102,24 +100,40 @@ const year = new Date().getFullYear();
       </div>
     </div>
 
-    <!-- Bottom bar -->
-    <div class="flex flex-col items-center justify-between border-t border-blue-100 pt-6 sm:flex-row">
-      <div class="mb-4 flex items-center text-sm text-gray-500 sm:mb-0">
-        <span>© {year} Easy MinGW Installer</span>
-        <span class="mx-1.5">•</span>
-        <span
-          >Created by
-          <a href="https://github.com/ehsan18t" class="font-medium text-blue-600 transition-colors hover:text-blue-700" target="_blank" rel="noreferrer"> Ehsan Khan </a>
-        </span>
-      </div>
+    <!-- Professionally redesigned bottom bar -->
+    <div class="relative border-t border-blue-100 pt-5">
+      <div class="flex flex-col-reverse items-center justify-between gap-4 sm:flex-row sm:gap-0">
+        <div class="flex items-center">
+          <a href="https://github.com/ehsan18t" class="group mr-2 inline-flex items-center gap-1.5 text-sm font-medium text-gray-600 transition-colors hover:text-blue-600" target="_blank" rel="noreferrer">
+            <div class="flex h-6 w-6 items-center justify-center rounded-full bg-blue-100 group-hover:bg-blue-200">
+              <Icon name="user" size={12} class="text-blue-600" />
+            </div>
+            <span>Ehsan Khan</span>
+          </a>
+          <span class="mx-2 text-gray-300">|</span>
+          <span class="text-sm text-gray-500">© 2023-<span id="year"></span> Easy MinGW Installer</span>
+        </div>
 
-      <!-- Back to top -->
-      <button id="back-to-top" class="group flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 px-4 py-2 text-sm font-medium text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md">
-        <span>Back to top</span>
-        <Icon name="simple-line-icons:arrow-up" size={16} class="transition-transform duration-300 group-hover:-translate-y-0.5" />
-      </button>
+        <div class="flex items-center gap-4">
+          <a href="#top" class="back-to-top-link group inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-white px-4 py-1.5 text-sm font-medium text-gray-600 shadow-sm transition-all hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700">
+            <span>Back to top</span>
+            <span class="flex h-4 w-4 items-center justify-center rounded-full bg-blue-100 group-hover:bg-blue-200">
+              <Icon name="simple-line-icons:arrow-up" size={10} class="text-blue-600" />
+            </span>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
+
+  <!-- floating back-to-top button -->
+  <button
+    id="back-to-top"
+    class="fixed right-6 bottom-6 z-50 flex h-10 w-10 items-center justify-center rounded-full bg-white text-blue-600 shadow-lg ring-2 ring-blue-100 transition-all duration-300 hover:-translate-y-1 hover:bg-blue-50 hover:ring-blue-300 focus:outline-none active:bg-blue-100"
+    aria-label="Back to top"
+  >
+    <Icon name="simple-line-icons:arrow-up" size={16} />
+  </button>
 </footer>
 
 <style>
@@ -150,14 +164,74 @@ const year = new Date().getFullYear();
     @apply text-gray-700;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   }
+
+  /* Add pulse animation for initial visibility */
+  @keyframes pulse {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 0 8px rgba(59, 130, 246, 0);
+    }
+  }
+
+  #back-to-top {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  #back-to-top.visible {
+    opacity: 1;
+    transform: translateY(0);
+    animation: pulse 2s infinite;
+  }
+
+  /* No need to hide the inline back-to-top link */
+  .back-to-top-link {
+    display: inline-flex;
+  }
 </style>
 
 <script>
-  // Back to top button functionality
-  document.getElementById("back-to-top")?.addEventListener("click", () => {
+  // Fixed back-to-top button functionality
+  const backToTopButton = document.getElementById("back-to-top");
+  const backToTopLink = document.querySelector(".back-to-top-link");
+
+  if (backToTopButton) {
+    // Check initial scroll position
+    if (window.scrollY > 200) {
+      backToTopButton.classList.add("visible");
+    }
+
+    // Show/hide based on scroll position
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 200) {
+        backToTopButton.classList.add("visible");
+      } else {
+        backToTopButton.classList.remove("visible");
+      }
+    });
+
+    // Scroll to top when clicked
+    backToTopButton.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    });
+  }
+
+  // Inline link functionality
+  backToTopLink?.addEventListener("click", (e) => {
+    e.preventDefault();
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
   });
+
+  const yearElement = document.getElementById("year");
+  const currentYear = new Date().getFullYear();
+  yearElement!.textContent = `${currentYear}`;
 </script>
