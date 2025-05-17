@@ -67,10 +67,36 @@
 
 .markdown-body pre {
   @apply my-5 overflow-x-auto rounded-lg border border-blue-100 bg-blue-50 p-4;
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: rgba(99, 102, 241, 0.3) rgba(219, 234, 254, 0.5); /* Firefox */
 }
 
+/* Webkit scrollbars (Chrome, Edge, Safari) */
+.markdown-body pre::-webkit-scrollbar {
+  height: 6px; /* for horizontal scrollbar */
+}
+
+.markdown-body pre::-webkit-scrollbar-track {
+  @apply rounded-b-lg bg-blue-50/80;
+}
+
+.markdown-body pre::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-blue-300/50;
+  border: 1px solid rgba(219, 234, 254, 0.5);
+}
+
+.markdown-body pre::-webkit-scrollbar-thumb:hover {
+  @apply bg-indigo-400/50;
+}
+
+/* Make sure code inside pre doesn't add double styling */
 .markdown-body pre code {
   @apply block bg-transparent p-0 text-blue-700;
+  scrollbar-width: none; /* Hide nested scrollbars in Firefox */
+}
+
+.markdown-body pre code::-webkit-scrollbar {
+  display: none; /* Hide nested scrollbars in Webkit */
 }
 
 /* Blockquotes */
