@@ -4,19 +4,109 @@ import { Icon } from "astro-icon/components";
 type DownloadLinkProps = {
   id: string;
   platform: string;
+  fileSize?: string;
+  version?: string;
 };
 
 const { id, platform } = Astro.props as DownloadLinkProps;
+
+// Determine icon based on platform
+const platformIcon = platform.toLowerCase().includes("64") ? "simple-icons:windows" : "simple-icons:windows";
 ---
 
-<a id={id} target="_blank" class="remove-underline w-full px-4 md:px-0 lg:w-2/5" rel="noreferrer">
-  <div class="transform overflow-hidden rounded-lg border border-gray-200 shadow-md transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg">
-    <div class="flex items-center justify-center bg-gradient-to-r from-blue-500 to-teal-500 p-6 text-white">
-      <Icon name="download" size={40} />
+<a id={id} target="_blank" class="download-card group w-full cursor-pointer px-4 transition-transform duration-300 hover:scale-[1.02] md:px-3 lg:w-[340px]" rel="noreferrer">
+  <div class="relative overflow-hidden rounded-xl border border-indigo-100/50 bg-white shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/10">
+    <!-- Top border gradient -->
+    <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-blue-500"></div>
+
+    <!-- Floating particle decoration -->
+    <div class="absolute -top-4 -right-4 h-16 w-16 rounded-full bg-blue-500/10 blur-xl"></div>
+    <div class="absolute -bottom-4 -left-4 h-16 w-16 rounded-full bg-indigo-500/10 blur-xl"></div>
+
+    <!-- Header with platform info -->
+    <div class="flex items-center gap-4 border-b border-gray-100 bg-gradient-to-r from-blue-50 to-indigo-50/50 p-6">
+      <div class="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 text-white shadow-md transition-all duration-300 group-hover:shadow-lg group-hover:shadow-blue-500/30">
+        <Icon name={platformIcon} size={28} class="transition-transform duration-300 group-hover:scale-110" />
+      </div>
+      <div>
+        <h3 class="text-xl font-bold text-gray-800">{platform}</h3>
+        <p class="text-sm font-medium text-blue-600">MinGW Installer <span class="version"></span></p>
+      </div>
     </div>
-    <div class="bg-white p-6">
-      <h3 class="mb-2 text-xl font-semibold text-gray-800">{platform}</h3>
-      <p class="mb-2 text-gray-600">Click to download</p>
+
+    <!-- Content section -->
+    <div class="flex flex-col justify-between gap-5 p-6">
+      <div class="space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-sm font-medium text-gray-500">File size</span>
+          <span id={`file-size-${platform.includes("64") ? "64" : "32"}`} class="font-semibold text-gray-700"></span>
+        </div>
+
+        <div class="flex items-center justify-between">
+          <span class="text-sm font-medium text-gray-500">Architecture</span>
+          <span class="font-semibold text-gray-700">
+            {platform.includes("64") ? "x86_64" : "x86"}
+          </span>
+        </div>
+
+        <div class="flex items-center justify-between">
+          <span class="text-sm font-medium text-gray-500">Compiler</span>
+          <span class="font-semibold text-gray-700">GCC</span>
+        </div>
+
+        <div class="flex items-center justify-between">
+          <span class="text-sm font-medium text-gray-500">Thread Model</span>
+          <span class="font-semibold text-gray-700">POSIX</span>
+        </div>
+
+        <div class="flex items-center justify-between">
+          <span class="text-sm font-medium text-gray-500">Runtime</span>
+          <span class="font-semibold text-gray-700">UCRT</span>
+        </div>
+      </div>
+
+      <button
+        class="download-btn relative cursor-pointer overflow-hidden rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-3 text-center font-medium text-white shadow-md transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/30 focus:ring-2 focus:ring-blue-500/50 focus:outline-none"
+      >
+        <span class="shimmer absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent"></span>
+        <div class="relative z-10 flex items-center justify-center gap-2">
+          <Icon name="download" size={18} class="download-icon" />
+          <span>Download Now</span>
+        </div>
+      </button>
     </div>
   </div>
 </a>
+
+<style>
+  .download-card {
+    text-decoration: none;
+  }
+
+  .download-btn:hover .shimmer {
+    animation: shimmer 1.5s infinite;
+  }
+
+  .download-btn:hover .download-icon {
+    animation: bounce 1s infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-4px);
+    }
+  }
+</style>

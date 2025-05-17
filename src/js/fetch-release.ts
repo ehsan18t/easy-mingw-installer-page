@@ -32,15 +32,24 @@ async function fetchRelease() {
             .browser_download_url,
         );
 
-      // Update Release Markdown
-      document.getElementById("release-version")!.innerHTML =
-        `Release v${data.tag_name}`;
+      // Update versions
+      document
+        .querySelectorAll(".version")
+        .forEach((el) => (el.innerHTML = `v${data.tag_name}`));
 
-      // Update Latest Version Hero
-      document.getElementById("latest-version")!.innerHTML =
-        `v${data.tag_name}`;
+      // Update file size
+      document.getElementById("file-size-64")!.innerHTML = `${(
+        data.assets.find((asset: any) => asset.name.includes("64-bit")).size /
+        1024 /
+        1024
+      ).toFixed(2)} MB`;
 
-      // Preproces  s Markdown to replace commit hashes with links
+      document.getElementById("file-size-32")!.innerHTML = `${(
+        data.assets.find((asset: any) => asset.name.includes("32-bit")).size /
+        1024 /
+        1024
+      ).toFixed(2)} MB`;
+
       // Process Markdown for changelog
       const processedMarkdown = data.body.replace(
         /```[\s\S]*?```|`[^`]+`|([a-f0-9]{40})/g,

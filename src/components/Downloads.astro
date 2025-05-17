@@ -1,10 +1,24 @@
 ---
-import DownloadLink from './DownloadLink.astro';
+import DownloadLink from "./DownloadLink.astro";
 ---
 
-<div class="mb-10 flex w-full flex-col justify-center">
-  <div class="-mx-4 flex flex-col flex-wrap justify-center gap-4 md:-mx-2 md:gap-6 lg:flex-row">
-    <DownloadLink id="btn-dl-64" platform="Windows 64-bit" />
-    <DownloadLink id="btn-dl-32" platform="Windows 32-bit" />
+<div id="download-section" class="relative overflow-hidden py-10">
+  <div class="relative container mx-auto px-4 py-8">
+    <div class="mb-12 text-center">
+      <span class="inline-block rounded-full bg-blue-100 px-4 py-1.5 text-sm font-semibold text-blue-700">Ready to Install</span>
+      <h2 class="mt-4 text-3xl font-extrabold text-gray-800 md:text-4xl">
+        Get MinGW Installer
+        <span class="relative inline-block">
+          Now
+          <span class="absolute -bottom-2 left-0 h-1.5 w-full rounded-full bg-gradient-to-r from-blue-600 to-indigo-500"></span>
+        </span>
+      </h2>
+      <p class="mx-auto mt-4 max-w-2xl text-lg text-gray-600">Choose the version that matches your system architecture for the best performance</p>
+    </div>
+
+    <div class="flex flex-col items-center justify-center gap-8 md:flex-row md:gap-10">
+      <DownloadLink id="btn-dl-64" platform="Windows 64-bit" />
+      <DownloadLink id="btn-dl-32" platform="Windows 32-bit" />
+    </div>
   </div>
 </div>
