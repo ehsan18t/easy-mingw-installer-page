@@ -1,5 +1,3 @@
-import { marked } from "marked";
-
 // Type definitions for better type safety
 interface GitHubAsset {
   name: string;
@@ -19,7 +17,7 @@ interface GitHubRelease {
 interface ProcessedReleaseData {
   latestVersion: string;
   latestReleaseDate: string;
-  latestReleaseBody: string;
+  processedReleaseHTML: string;
   totalDownloads: number;
   asset64bit?: {
     downloadUrl: string;
@@ -60,14 +58,23 @@ class ReleaseManager {
   /**
    * Extract and process only the needed information from releases
    */
-  private processReleaseData(releases: GitHubRelease[]): ProcessedReleaseData {
+  private async processReleaseData(
+    releases: GitHubRelease[],
+  ): Promise<ProcessedReleaseData> {
     const latestRelease = releases[0];
     const totalDownloads = this.calculateTotalDownloads(releases);
+
+    // Only import marked when needed
+    const { marked } = await import("marked");
+
+    // Process markdown to HTML immediately
+    const processedMarkdown = this.processReleaseMarkdown(latestRelease.body);
+    const processedReleaseHTML = await marked.parse(processedMarkdown);
 
     const processedData: ProcessedReleaseData = {
       latestVersion: latestRelease.tag_name,
       latestReleaseDate: formatDate(latestRelease.published_at),
-      latestReleaseBody: latestRelease.body,
+      processedReleaseHTML, // Store pre-processed HTML
       totalDownloads,
     };
 
@@ -140,6 +147,7 @@ class ReleaseManager {
       console.warn("Could not cache release data:", error);
     }
   }
+
   /**
    * Get release data - either from cache or from API
    */
@@ -165,7 +173,7 @@ class ReleaseManager {
     }
 
     // Process and cache the data
-    const processedData = this.processReleaseData(releases);
+    const processedData = await this.processReleaseData(releases);
     this.cacheProcessedData(processedData);
 
     return processedData;
@@ -195,7 +203,8 @@ class ReleaseManager {
       /```[\s\S]*?```|`[^`]+`|([a-f0-9]{40})/g,
       (match: string, hash?: string) => {
         if (hash) {
-          return `<a href="commit/${this.repoUrl}${hash}" class="commit-link" target="_blank" rel="noreferrer">${hash.slice(0, 7)}</a>`;
+          // Fix URL construction to properly format commit links
+          return `<a href="${this.repoUrl}commit/${hash}" class="commit-link" target="_blank" rel="noreferrer">${hash.slice(0, 7)}</a>`;
         }
         return match;
       },
@@ -250,19 +259,8 @@ class ReleaseManager {
 
     // Update release content
     if (elements.release) {
-      const renderMarkdown = async () => {
-        const processedMarkdown = this.processReleaseMarkdown(
-          data.latestReleaseBody,
-        );
-        const parsedHTML = await marked.parse(processedMarkdown);
-        if (elements.release) {
-          elements.release.innerHTML = parsedHTML;
-        }
-      };
-
-      window.requestAnimationFrame(() => {
-        renderMarkdown().catch(console.error);
-      });
+      // No need to process the markdown again - just insert the pre-processed HTML
+      elements.release.innerHTML = data.processedReleaseHTML;
     }
 
     // Update release date
