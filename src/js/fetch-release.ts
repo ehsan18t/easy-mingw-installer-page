@@ -293,8 +293,10 @@ class ReleaseManager {
     };
 
     if (elements.release) {
-      elements.release.innerHTML = `
-        <div class="bg-red-50 border-l-4 border-red-500 p-4 my-4">
+      const errorContainer = document.getElementById("fetched-data");
+      if (errorContainer) {
+        errorContainer.innerHTML = `
+        <div class="bg-red-50 border-l-4 border-red-500 p-4 my-10">
           <div class="flex">
             <div class="flex-shrink-0">
               <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
@@ -310,6 +312,7 @@ class ReleaseManager {
           </div>
         </div>
       `;
+      }
     }
 
     // Clean up even on error
